@@ -1,0 +1,9 @@
+flowchart LR
+  U[Demo user] --> UI[React SPA]
+  UI --> DS[Domain selectors and local commands]
+  DS --> FX[Bundled synthetic fixtures]
+  DS --> SIM[Deterministic scenario scheduler]
+  DS --> LS[Tenant-scoped local draft storage]
+  SIM --> EV[Typed event reducer]
+  EV --> UI
+  UI -. no network integrations .-> X[No external actions]

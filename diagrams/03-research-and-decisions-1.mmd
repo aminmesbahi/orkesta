@@ -1,0 +1,8 @@
+flowchart LR
+  UI[App frontend] <-->|AG-UI events| AR[Agent runtime]
+  AR -->|A2UI declarative payload| CAT[Approved UI catalog renderer]
+  CAT --> UI
+  AR <-->|MCP tools and resources| CON[Connector servers]
+  AR <-->|Optional AHP policy hooks| H[Harness control]
+  RF[React Flow graph editor] --> WF[Workflow definition]
+  WF --> ORCH[Separate coordinator]

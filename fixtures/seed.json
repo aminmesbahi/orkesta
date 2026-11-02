@@ -1,0 +1,4390 @@
+{
+  "schemaVersion": "orkesta.demo.v1",
+  "fixtureRevision": "2026-11-02.1",
+  "synthetic": true,
+  "baseTime": "2026-11-02T08:00:00Z",
+  "tenants": [
+    {
+      "id": "atlas",
+      "name": "Atlas Commerce",
+      "slug": "atlas"
+    },
+    {
+      "id": "meridian",
+      "name": "Meridian Labs",
+      "slug": "meridian"
+    }
+  ],
+  "teams": [
+    {
+      "id": "team-commerce",
+      "tenantId": "atlas",
+      "name": "Commerce Platform",
+      "timezone": "Europe/Berlin",
+      "memberIds": [
+        "sara",
+        "nima",
+        "elena",
+        "omar",
+        "lea"
+      ]
+    },
+    {
+      "id": "team-experience",
+      "tenantId": "atlas",
+      "name": "Seller Experience",
+      "timezone": "Europe/Berlin",
+      "memberIds": [
+        "elena",
+        "jonas"
+      ]
+    },
+    {
+      "id": "team-meridian",
+      "tenantId": "meridian",
+      "name": "Labs Engineering",
+      "timezone": "Europe/Berlin",
+      "memberIds": [
+        "m-ada",
+        "m-lee"
+      ]
+    }
+  ],
+  "members": [
+    {
+      "id": "sara",
+      "tenantId": "atlas",
+      "name": "Sara Rahimi",
+      "roles": [
+        "developer"
+      ],
+      "availableHoursPerDay": 6,
+      "teamIds": [
+        "team-commerce"
+      ],
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "id": "nima",
+      "tenantId": "atlas",
+      "name": "Nima Farzan",
+      "roles": [
+        "developer"
+      ],
+      "availableHoursPerDay": 4,
+      "teamIds": [
+        "team-commerce"
+      ],
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "id": "elena",
+      "tenantId": "atlas",
+      "name": "Elena Weber",
+      "roles": [
+        "engineering_lead",
+        "team_admin"
+      ],
+      "availableHoursPerDay": 5,
+      "teamIds": [
+        "team-commerce",
+        "team-experience"
+      ],
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "id": "omar",
+      "tenantId": "atlas",
+      "name": "Omar Aziz",
+      "roles": [
+        "reviewer"
+      ],
+      "availableHoursPerDay": 5,
+      "teamIds": [
+        "team-commerce"
+      ],
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "id": "lea",
+      "tenantId": "atlas",
+      "name": "Lea Hoffmann",
+      "roles": [
+        "owner",
+        "product_lead",
+        "release_approver"
+      ],
+      "availableHoursPerDay": 4,
+      "teamIds": [
+        "team-commerce"
+      ],
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "id": "jonas",
+      "tenantId": "atlas",
+      "name": "Jonas Becker",
+      "roles": [
+        "business",
+        "viewer"
+      ],
+      "availableHoursPerDay": 4,
+      "teamIds": [
+        "team-experience"
+      ],
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "id": "m-ada",
+      "tenantId": "meridian",
+      "name": "Ada Chen",
+      "roles": [
+        "owner",
+        "team_admin"
+      ],
+      "availableHoursPerDay": 6,
+      "teamIds": [
+        "team-meridian"
+      ],
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "id": "m-lee",
+      "tenantId": "meridian",
+      "name": "Lee Park",
+      "roles": [
+        "developer"
+      ],
+      "availableHoursPerDay": 5,
+      "teamIds": [
+        "team-meridian"
+      ],
+      "timezone": "Europe/Berlin"
+    }
+  ],
+  "projects": [
+    {
+      "id": "refunds",
+      "tenantId": "atlas",
+      "teamId": "team-commerce",
+      "name": "Refund Modernization",
+      "key": "RFND",
+      "ownerId": "elena",
+      "workflowId": "wf-evidence",
+      "bindingIds": [
+        "bind-business",
+        "bind-docs",
+        "bind-code",
+        "bind-product",
+        "bind-capacity",
+        "bind-ci",
+        "bind-deploy",
+        "bind-leave"
+      ]
+    },
+    {
+      "id": "seller",
+      "tenantId": "atlas",
+      "teamId": "team-experience",
+      "name": "Seller Portal",
+      "key": "SELL",
+      "ownerId": "elena",
+      "workflowId": "wf-seller",
+      "bindingIds": []
+    },
+    {
+      "id": "m-project",
+      "tenantId": "meridian",
+      "teamId": "team-meridian",
+      "name": "Lab Operations",
+      "key": "LAB",
+      "ownerId": "m-ada",
+      "workflowId": "wf-labs",
+      "bindingIds": []
+    }
+  ],
+  "connectors": [
+    {
+      "id": "cx-jira",
+      "tenantId": "atlas",
+      "provider": "jira",
+      "name": "jira",
+      "status": "connected_demo",
+      "capabilityNames": [
+        "search_issues",
+        "read_issue",
+        "propose_issue"
+      ],
+      "workspaceUrl": "https://jira.example/atlas"
+    },
+    {
+      "id": "cx-confluence",
+      "tenantId": "atlas",
+      "provider": "confluence",
+      "name": "confluence",
+      "status": "connected_demo",
+      "capabilityNames": [
+        "search_docs",
+        "read_doc"
+      ],
+      "workspaceUrl": "https://confluence.example/atlas"
+    },
+    {
+      "id": "cx-github",
+      "tenantId": "atlas",
+      "provider": "github",
+      "name": "github",
+      "status": "connected_demo",
+      "capabilityNames": [
+        "search_repos",
+        "read_file",
+        "read_pr",
+        "read_ci",
+        "propose_pr"
+      ],
+      "workspaceUrl": "https://github.example/atlas"
+    },
+    {
+      "id": "cx-nova",
+      "tenantId": "atlas",
+      "provider": "nova",
+      "name": "Nova · custom adapter (demo)",
+      "status": "connected_demo",
+      "capabilityNames": [
+        "read_business",
+        "propose_update"
+      ],
+      "workspaceUrl": "https://nova.example/atlas"
+    },
+    {
+      "id": "cx-calendar",
+      "tenantId": "atlas",
+      "provider": "calendar",
+      "name": "calendar",
+      "status": "connected_demo",
+      "capabilityNames": [
+        "read_availability"
+      ],
+      "workspaceUrl": "https://calendar.example/atlas"
+    },
+    {
+      "id": "cx-leave",
+      "tenantId": "atlas",
+      "provider": "leave",
+      "name": "leave",
+      "status": "connected_demo",
+      "capabilityNames": [
+        "read_leave"
+      ],
+      "workspaceUrl": "https://leave.example/atlas"
+    },
+    {
+      "id": "cx-files",
+      "tenantId": "atlas",
+      "provider": "files",
+      "name": "files",
+      "status": "connected_demo",
+      "capabilityNames": [
+        "read_document"
+      ],
+      "workspaceUrl": "https://files.example/atlas"
+    },
+    {
+      "id": "cx-messaging",
+      "tenantId": "atlas",
+      "provider": "messaging",
+      "name": "messaging",
+      "status": "connected_demo",
+      "capabilityNames": [
+        "preview_message"
+      ],
+      "workspaceUrl": "https://messaging.example/atlas"
+    },
+    {
+      "id": "cx-cicd",
+      "tenantId": "atlas",
+      "provider": "cicd",
+      "name": "cicd",
+      "status": "connected_demo",
+      "capabilityNames": [
+        "read_ci",
+        "preview_deploy"
+      ],
+      "workspaceUrl": "https://cicd.example/atlas"
+    },
+    {
+      "id": "cx-database",
+      "tenantId": "atlas",
+      "provider": "database",
+      "name": "database",
+      "status": "connected_demo",
+      "capabilityNames": [
+        "read_schema",
+        "read_aggregate"
+      ],
+      "workspaceUrl": "https://database.example/atlas"
+    },
+    {
+      "id": "m-cx-jira",
+      "tenantId": "meridian",
+      "provider": "jira",
+      "name": "Meridian jira",
+      "status": "not_configured",
+      "capabilityNames": [
+        "search_issues",
+        "read_issue",
+        "propose_issue"
+      ],
+      "workspaceUrl": "https://jira.example/meridian"
+    },
+    {
+      "id": "m-cx-github",
+      "tenantId": "meridian",
+      "provider": "github",
+      "name": "Meridian github",
+      "status": "not_configured",
+      "capabilityNames": [
+        "search_repos",
+        "read_file",
+        "read_pr",
+        "read_ci",
+        "propose_pr"
+      ],
+      "workspaceUrl": "https://github.example/meridian"
+    }
+  ],
+  "resources": [
+    {
+      "id": "res-jira",
+      "tenantId": "atlas",
+      "connectorId": "cx-jira",
+      "externalId": "res-jira",
+      "kind": "jira",
+      "title": "jira workspace",
+      "revision": "demo-r1",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "res-confluence",
+      "tenantId": "atlas",
+      "connectorId": "cx-confluence",
+      "externalId": "res-confluence",
+      "kind": "confluence",
+      "title": "Commerce decision space",
+      "revision": "demo-r1",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "res-nova",
+      "tenantId": "atlas",
+      "connectorId": "cx-nova",
+      "externalId": "res-nova",
+      "kind": "nova",
+      "title": "nova workspace",
+      "revision": "demo-r1",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "res-calendar",
+      "tenantId": "atlas",
+      "connectorId": "cx-calendar",
+      "externalId": "res-calendar",
+      "kind": "calendar",
+      "title": "calendar workspace",
+      "revision": "demo-r1",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "res-leave",
+      "tenantId": "atlas",
+      "connectorId": "cx-leave",
+      "externalId": "res-leave",
+      "kind": "leave",
+      "title": "leave workspace",
+      "revision": "demo-r1",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "res-files",
+      "tenantId": "atlas",
+      "connectorId": "cx-files",
+      "externalId": "res-files",
+      "kind": "files",
+      "title": "files workspace",
+      "revision": "demo-r1",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "res-messaging",
+      "tenantId": "atlas",
+      "connectorId": "cx-messaging",
+      "externalId": "res-messaging",
+      "kind": "messaging",
+      "title": "messaging workspace",
+      "revision": "demo-r1",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "res-cicd",
+      "tenantId": "atlas",
+      "connectorId": "cx-cicd",
+      "externalId": "res-cicd",
+      "kind": "cicd",
+      "title": "cicd workspace",
+      "revision": "demo-r1",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "res-database",
+      "tenantId": "atlas",
+      "connectorId": "cx-database",
+      "externalId": "res-database",
+      "kind": "database",
+      "title": "database workspace",
+      "revision": "demo-r1",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "res-restricted",
+      "tenantId": "atlas",
+      "connectorId": "cx-confluence",
+      "externalId": "res-restricted",
+      "kind": "document",
+      "title": "Restricted resource",
+      "revision": "unknown",
+      "visibility": "restricted",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-001",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-001",
+      "kind": "repository",
+      "title": "payment-api",
+      "revision": "demo-c7a91",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-002",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-002",
+      "kind": "repository",
+      "title": "order-service",
+      "revision": "demo-c7a91",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-003",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-003",
+      "kind": "repository",
+      "title": "seller-web",
+      "revision": "demo-c7a91",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-004",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-004",
+      "kind": "repository",
+      "title": "ledger-worker",
+      "revision": "demo-c7a91",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-005",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-005",
+      "kind": "repository",
+      "title": "commerce-module-005",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-006",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-006",
+      "kind": "repository",
+      "title": "platform-module-006",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-007",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-007",
+      "kind": "repository",
+      "title": "experience-module-007",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-008",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-008",
+      "kind": "repository",
+      "title": "operations-module-008",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-009",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-009",
+      "kind": "repository",
+      "title": "commerce-module-009",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-010",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-010",
+      "kind": "repository",
+      "title": "platform-module-010",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-011",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-011",
+      "kind": "repository",
+      "title": "experience-module-011",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-012",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-012",
+      "kind": "repository",
+      "title": "operations-module-012",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-013",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-013",
+      "kind": "repository",
+      "title": "commerce-module-013",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-014",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-014",
+      "kind": "repository",
+      "title": "platform-module-014",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-015",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-015",
+      "kind": "repository",
+      "title": "experience-module-015",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-016",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-016",
+      "kind": "repository",
+      "title": "operations-module-016",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-017",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-017",
+      "kind": "repository",
+      "title": "commerce-module-017",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-018",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-018",
+      "kind": "repository",
+      "title": "platform-module-018",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-019",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-019",
+      "kind": "repository",
+      "title": "experience-module-019",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-020",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-020",
+      "kind": "repository",
+      "title": "operations-module-020",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-021",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-021",
+      "kind": "repository",
+      "title": "commerce-module-021",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-022",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-022",
+      "kind": "repository",
+      "title": "platform-module-022",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-023",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-023",
+      "kind": "repository",
+      "title": "experience-module-023",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-024",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-024",
+      "kind": "repository",
+      "title": "operations-module-024",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-025",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-025",
+      "kind": "repository",
+      "title": "commerce-module-025",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-026",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-026",
+      "kind": "repository",
+      "title": "platform-module-026",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-027",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-027",
+      "kind": "repository",
+      "title": "experience-module-027",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-028",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-028",
+      "kind": "repository",
+      "title": "operations-module-028",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-029",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-029",
+      "kind": "repository",
+      "title": "commerce-module-029",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-030",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-030",
+      "kind": "repository",
+      "title": "platform-module-030",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-031",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-031",
+      "kind": "repository",
+      "title": "experience-module-031",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-032",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-032",
+      "kind": "repository",
+      "title": "operations-module-032",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-033",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-033",
+      "kind": "repository",
+      "title": "commerce-module-033",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-034",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-034",
+      "kind": "repository",
+      "title": "platform-module-034",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-035",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-035",
+      "kind": "repository",
+      "title": "experience-module-035",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-036",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-036",
+      "kind": "repository",
+      "title": "operations-module-036",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-037",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-037",
+      "kind": "repository",
+      "title": "commerce-module-037",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-038",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-038",
+      "kind": "repository",
+      "title": "platform-module-038",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-039",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-039",
+      "kind": "repository",
+      "title": "experience-module-039",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-040",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-040",
+      "kind": "repository",
+      "title": "operations-module-040",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-041",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-041",
+      "kind": "repository",
+      "title": "commerce-module-041",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-042",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-042",
+      "kind": "repository",
+      "title": "platform-module-042",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-043",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-043",
+      "kind": "repository",
+      "title": "experience-module-043",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-044",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-044",
+      "kind": "repository",
+      "title": "operations-module-044",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-045",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-045",
+      "kind": "repository",
+      "title": "commerce-module-045",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-046",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-046",
+      "kind": "repository",
+      "title": "platform-module-046",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-047",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-047",
+      "kind": "repository",
+      "title": "experience-module-047",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-048",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-048",
+      "kind": "repository",
+      "title": "operations-module-048",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-049",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-049",
+      "kind": "repository",
+      "title": "commerce-module-049",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-050",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-050",
+      "kind": "repository",
+      "title": "platform-module-050",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-051",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-051",
+      "kind": "repository",
+      "title": "experience-module-051",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-052",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-052",
+      "kind": "repository",
+      "title": "operations-module-052",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-053",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-053",
+      "kind": "repository",
+      "title": "commerce-module-053",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-054",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-054",
+      "kind": "repository",
+      "title": "platform-module-054",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-055",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-055",
+      "kind": "repository",
+      "title": "experience-module-055",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-056",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-056",
+      "kind": "repository",
+      "title": "operations-module-056",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-057",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-057",
+      "kind": "repository",
+      "title": "commerce-module-057",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-058",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-058",
+      "kind": "repository",
+      "title": "platform-module-058",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-059",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-059",
+      "kind": "repository",
+      "title": "experience-module-059",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-060",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-060",
+      "kind": "repository",
+      "title": "operations-module-060",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-061",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-061",
+      "kind": "repository",
+      "title": "commerce-module-061",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-062",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-062",
+      "kind": "repository",
+      "title": "platform-module-062",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-063",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-063",
+      "kind": "repository",
+      "title": "experience-module-063",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-064",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-064",
+      "kind": "repository",
+      "title": "operations-module-064",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-065",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-065",
+      "kind": "repository",
+      "title": "commerce-module-065",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-066",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-066",
+      "kind": "repository",
+      "title": "platform-module-066",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-067",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-067",
+      "kind": "repository",
+      "title": "experience-module-067",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-068",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-068",
+      "kind": "repository",
+      "title": "operations-module-068",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-069",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-069",
+      "kind": "repository",
+      "title": "commerce-module-069",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-070",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-070",
+      "kind": "repository",
+      "title": "platform-module-070",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-071",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-071",
+      "kind": "repository",
+      "title": "experience-module-071",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-072",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-072",
+      "kind": "repository",
+      "title": "operations-module-072",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-073",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-073",
+      "kind": "repository",
+      "title": "commerce-module-073",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-074",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-074",
+      "kind": "repository",
+      "title": "platform-module-074",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-075",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-075",
+      "kind": "repository",
+      "title": "experience-module-075",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-076",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-076",
+      "kind": "repository",
+      "title": "operations-module-076",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-077",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-077",
+      "kind": "repository",
+      "title": "commerce-module-077",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-078",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-078",
+      "kind": "repository",
+      "title": "platform-module-078",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-079",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-079",
+      "kind": "repository",
+      "title": "experience-module-079",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-080",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-080",
+      "kind": "repository",
+      "title": "operations-module-080",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-081",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-081",
+      "kind": "repository",
+      "title": "commerce-module-081",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-082",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-082",
+      "kind": "repository",
+      "title": "platform-module-082",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-083",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-083",
+      "kind": "repository",
+      "title": "experience-module-083",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-084",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-084",
+      "kind": "repository",
+      "title": "operations-module-084",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-085",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-085",
+      "kind": "repository",
+      "title": "commerce-module-085",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-086",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-086",
+      "kind": "repository",
+      "title": "platform-module-086",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-087",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-087",
+      "kind": "repository",
+      "title": "experience-module-087",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-088",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-088",
+      "kind": "repository",
+      "title": "operations-module-088",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-089",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-089",
+      "kind": "repository",
+      "title": "commerce-module-089",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-090",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-090",
+      "kind": "repository",
+      "title": "platform-module-090",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-091",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-091",
+      "kind": "repository",
+      "title": "experience-module-091",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-092",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-092",
+      "kind": "repository",
+      "title": "operations-module-092",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-093",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-093",
+      "kind": "repository",
+      "title": "commerce-module-093",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-094",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-094",
+      "kind": "repository",
+      "title": "platform-module-094",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-095",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-095",
+      "kind": "repository",
+      "title": "experience-module-095",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-096",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-096",
+      "kind": "repository",
+      "title": "operations-module-096",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-097",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-097",
+      "kind": "repository",
+      "title": "commerce-module-097",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-098",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-098",
+      "kind": "repository",
+      "title": "platform-module-098",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-099",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-099",
+      "kind": "repository",
+      "title": "experience-module-099",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-100",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-100",
+      "kind": "repository",
+      "title": "operations-module-100",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-101",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-101",
+      "kind": "repository",
+      "title": "commerce-module-101",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-102",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-102",
+      "kind": "repository",
+      "title": "platform-module-102",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-103",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-103",
+      "kind": "repository",
+      "title": "experience-module-103",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-104",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-104",
+      "kind": "repository",
+      "title": "operations-module-104",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-105",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-105",
+      "kind": "repository",
+      "title": "commerce-module-105",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-106",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-106",
+      "kind": "repository",
+      "title": "platform-module-106",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-107",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-107",
+      "kind": "repository",
+      "title": "experience-module-107",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-108",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-108",
+      "kind": "repository",
+      "title": "operations-module-108",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-109",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-109",
+      "kind": "repository",
+      "title": "commerce-module-109",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-110",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-110",
+      "kind": "repository",
+      "title": "platform-module-110",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-111",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-111",
+      "kind": "repository",
+      "title": "experience-module-111",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-112",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-112",
+      "kind": "repository",
+      "title": "operations-module-112",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-113",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-113",
+      "kind": "repository",
+      "title": "commerce-module-113",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-114",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-114",
+      "kind": "repository",
+      "title": "platform-module-114",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-115",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-115",
+      "kind": "repository",
+      "title": "experience-module-115",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-116",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-116",
+      "kind": "repository",
+      "title": "operations-module-116",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-117",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-117",
+      "kind": "repository",
+      "title": "commerce-module-117",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-118",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-118",
+      "kind": "repository",
+      "title": "platform-module-118",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-119",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-119",
+      "kind": "repository",
+      "title": "experience-module-119",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-120",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-120",
+      "kind": "repository",
+      "title": "operations-module-120",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-121",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-121",
+      "kind": "repository",
+      "title": "commerce-module-121",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-122",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-122",
+      "kind": "repository",
+      "title": "platform-module-122",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-123",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-123",
+      "kind": "repository",
+      "title": "experience-module-123",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-124",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-124",
+      "kind": "repository",
+      "title": "operations-module-124",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-125",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-125",
+      "kind": "repository",
+      "title": "commerce-module-125",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-126",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-126",
+      "kind": "repository",
+      "title": "platform-module-126",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-127",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-127",
+      "kind": "repository",
+      "title": "experience-module-127",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-128",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-128",
+      "kind": "repository",
+      "title": "operations-module-128",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-129",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-129",
+      "kind": "repository",
+      "title": "commerce-module-129",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-130",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-130",
+      "kind": "repository",
+      "title": "platform-module-130",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-131",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-131",
+      "kind": "repository",
+      "title": "experience-module-131",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-132",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-132",
+      "kind": "repository",
+      "title": "operations-module-132",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-atlas-133",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "externalId": "repo-atlas-133",
+      "kind": "repository",
+      "title": "commerce-module-133",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-meridian-1",
+      "tenantId": "meridian",
+      "connectorId": "m-cx-github",
+      "externalId": "repo-meridian-1",
+      "kind": "repository",
+      "title": "labs-service-1",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-meridian-2",
+      "tenantId": "meridian",
+      "connectorId": "m-cx-github",
+      "externalId": "repo-meridian-2",
+      "kind": "repository",
+      "title": "labs-service-2",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "repo-meridian-3",
+      "tenantId": "meridian",
+      "connectorId": "m-cx-github",
+      "externalId": "repo-meridian-3",
+      "kind": "repository",
+      "title": "labs-service-3",
+      "revision": "catalog-only",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    },
+    {
+      "id": "m-res-jira",
+      "tenantId": "meridian",
+      "connectorId": "m-cx-jira",
+      "externalId": "m-res-jira",
+      "kind": "issues",
+      "title": "Labs issues",
+      "revision": "demo-r1",
+      "visibility": "allowed",
+      "observedAt": "2026-11-02T08:00:00Z"
+    }
+  ],
+  "repositories": [
+    {
+      "id": "repo-atlas-001",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "payment-api",
+      "ownerTeamId": "team-experience",
+      "revision": "demo-c7a91",
+      "detailLevel": "evidence"
+    },
+    {
+      "id": "repo-atlas-002",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "order-service",
+      "ownerTeamId": "team-commerce",
+      "revision": "demo-c7a91",
+      "detailLevel": "evidence"
+    },
+    {
+      "id": "repo-atlas-003",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "seller-web",
+      "ownerTeamId": "team-commerce",
+      "revision": "demo-c7a91",
+      "detailLevel": "evidence"
+    },
+    {
+      "id": "repo-atlas-004",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "ledger-worker",
+      "ownerTeamId": "team-experience",
+      "revision": "demo-c7a91",
+      "detailLevel": "evidence"
+    },
+    {
+      "id": "repo-atlas-005",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-005",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-006",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-006",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-007",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-007",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-008",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-008",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-009",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-009",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-010",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-010",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-011",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-011",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-012",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-012",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-013",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-013",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-014",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-014",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-015",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-015",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-016",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-016",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-017",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-017",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-018",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-018",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-019",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-019",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-020",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-020",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-021",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-021",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-022",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-022",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-023",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-023",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-024",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-024",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-025",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-025",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-026",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-026",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-027",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-027",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-028",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-028",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-029",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-029",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-030",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-030",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-031",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-031",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-032",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-032",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-033",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-033",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-034",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-034",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-035",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-035",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-036",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-036",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-037",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-037",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-038",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-038",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-039",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-039",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-040",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-040",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-041",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-041",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-042",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-042",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-043",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-043",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-044",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-044",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-045",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-045",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-046",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-046",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-047",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-047",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-048",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-048",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-049",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-049",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-050",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-050",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-051",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-051",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-052",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-052",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-053",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-053",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-054",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-054",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-055",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-055",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-056",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-056",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-057",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-057",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-058",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-058",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-059",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-059",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-060",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-060",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-061",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-061",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-062",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-062",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-063",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-063",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-064",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-064",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-065",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-065",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-066",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-066",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-067",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-067",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-068",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-068",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-069",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-069",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-070",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-070",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-071",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-071",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-072",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-072",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-073",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-073",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-074",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-074",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-075",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-075",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-076",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-076",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-077",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-077",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-078",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-078",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-079",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-079",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-080",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-080",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-081",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-081",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-082",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-082",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-083",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-083",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-084",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-084",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-085",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-085",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-086",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-086",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-087",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-087",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-088",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-088",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-089",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-089",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-090",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-090",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-091",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-091",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-092",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-092",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-093",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-093",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-094",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-094",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-095",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-095",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-096",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-096",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-097",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-097",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-098",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-098",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-099",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-099",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-100",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-100",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-101",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-101",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-102",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-102",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-103",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-103",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-104",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-104",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-105",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-105",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-106",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-106",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-107",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-107",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-108",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-108",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-109",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-109",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-110",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-110",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-111",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-111",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-112",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-112",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-113",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-113",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-114",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-114",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-115",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-115",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-116",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-116",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-117",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-117",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-118",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-118",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-119",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-119",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-120",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-120",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-121",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-121",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-122",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-122",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-123",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-123",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-124",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-124",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-125",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-125",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-126",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-126",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-127",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-127",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-128",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-128",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-129",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-129",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-130",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "platform-module-130",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-131",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "experience-module-131",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-132",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "operations-module-132",
+      "ownerTeamId": "team-commerce",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-atlas-133",
+      "tenantId": "atlas",
+      "connectorId": "cx-github",
+      "name": "commerce-module-133",
+      "ownerTeamId": "team-experience",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-meridian-1",
+      "tenantId": "meridian",
+      "connectorId": "m-cx-github",
+      "name": "labs-service-1",
+      "ownerTeamId": "team-meridian",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-meridian-2",
+      "tenantId": "meridian",
+      "connectorId": "m-cx-github",
+      "name": "labs-service-2",
+      "ownerTeamId": "team-meridian",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    },
+    {
+      "id": "repo-meridian-3",
+      "tenantId": "meridian",
+      "connectorId": "m-cx-github",
+      "name": "labs-service-3",
+      "ownerTeamId": "team-meridian",
+      "revision": "catalog-only",
+      "detailLevel": "metadata_only"
+    }
+  ],
+  "bindings": [
+    {
+      "id": "bind-business",
+      "connectorId": "cx-jira",
+      "stages": [
+        "business",
+        "product"
+      ],
+      "resourceIds": [
+        "res-jira"
+      ],
+      "allowedOperations": [
+        "search_issues",
+        "read_issue",
+        "propose_issue"
+      ],
+      "tenantId": "atlas",
+      "projectId": "refunds"
+    },
+    {
+      "id": "bind-docs",
+      "connectorId": "cx-confluence",
+      "stages": [
+        "business",
+        "product"
+      ],
+      "resourceIds": [
+        "res-confluence"
+      ],
+      "allowedOperations": [
+        "search_docs",
+        "read_doc"
+      ],
+      "tenantId": "atlas",
+      "projectId": "refunds"
+    },
+    {
+      "id": "bind-code",
+      "connectorId": "cx-github",
+      "stages": [
+        "business",
+        "code",
+        "review"
+      ],
+      "resourceIds": [
+        "repo-atlas-001",
+        "repo-atlas-002",
+        "repo-atlas-003",
+        "repo-atlas-004"
+      ],
+      "allowedOperations": [
+        "search_repos",
+        "read_file",
+        "read_pr",
+        "propose_pr"
+      ],
+      "tenantId": "atlas",
+      "projectId": "refunds"
+    },
+    {
+      "id": "bind-product",
+      "connectorId": "cx-nova",
+      "stages": [
+        "business",
+        "product"
+      ],
+      "resourceIds": [
+        "res-nova"
+      ],
+      "allowedOperations": [
+        "read_business",
+        "propose_update"
+      ],
+      "tenantId": "atlas",
+      "projectId": "refunds"
+    },
+    {
+      "id": "bind-capacity",
+      "connectorId": "cx-calendar",
+      "stages": [
+        "product"
+      ],
+      "resourceIds": [
+        "res-calendar"
+      ],
+      "allowedOperations": [
+        "read_availability"
+      ],
+      "tenantId": "atlas",
+      "projectId": "refunds"
+    },
+    {
+      "id": "bind-ci",
+      "connectorId": "cx-cicd",
+      "stages": [
+        "ci"
+      ],
+      "resourceIds": [
+        "res-cicd"
+      ],
+      "allowedOperations": [
+        "read_ci"
+      ],
+      "tenantId": "atlas",
+      "projectId": "refunds"
+    },
+    {
+      "id": "bind-deploy",
+      "connectorId": "cx-cicd",
+      "stages": [
+        "deploy"
+      ],
+      "resourceIds": [
+        "res-cicd"
+      ],
+      "allowedOperations": [
+        "preview_deploy"
+      ],
+      "tenantId": "atlas",
+      "projectId": "refunds"
+    },
+    {
+      "id": "bind-leave",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "connectorId": "cx-leave",
+      "stages": [
+        "product"
+      ],
+      "resourceIds": [
+        "res-leave"
+      ],
+      "allowedOperations": [
+        "read_leave"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-ticket",
+      "connectorId": "cx-jira",
+      "resourceId": "res-jira",
+      "externalId": "PAY-217",
+      "sourceType": "jira",
+      "title": "Historical full refund scope",
+      "locator": "PAY-217 / decision 2024-06-12",
+      "revision": "issue-history-v3",
+      "observedAt": "2024-06-12T10:00:00Z",
+      "freshness": "stale",
+      "excerpt": "Synthetic historical decision: first release supports full refunds only.",
+      "claimRelation": "conflicts",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "visibility": "allowed",
+      "confidenceLabel": "moderate"
+    },
+    {
+      "id": "ev-doc",
+      "connectorId": "cx-confluence",
+      "resourceId": "res-confluence",
+      "externalId": "ADR-014",
+      "sourceType": "confluence",
+      "title": "Refund policy ADR — superseded",
+      "locator": "ADR-014 / Constraints",
+      "revision": "doc-v2",
+      "observedAt": "2024-07-01T09:00:00Z",
+      "freshness": "stale",
+      "excerpt": "Synthetic obsolete restriction: amount must equal capture total.",
+      "claimRelation": "conflicts",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "visibility": "allowed",
+      "confidenceLabel": "moderate"
+    },
+    {
+      "id": "ev-code-payment",
+      "connectorId": "cx-github",
+      "resourceId": "repo-atlas-001",
+      "externalId": "payment-api",
+      "sourceType": "github",
+      "title": "Payment amount request field",
+      "locator": "src/refunds/handler.ts:42",
+      "revision": "demo-c7a91",
+      "observedAt": "2026-11-02T08:00:00Z",
+      "freshness": "current",
+      "excerpt": "Fixture code accepts amountMinor but provider semantics remain unverified.",
+      "claimRelation": "supports",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "visibility": "allowed",
+      "confidenceLabel": "moderate"
+    },
+    {
+      "id": "ev-code-order",
+      "connectorId": "cx-github",
+      "resourceId": "repo-atlas-002",
+      "externalId": "order-service",
+      "sourceType": "github",
+      "title": "Order aggregate lacks concurrent refund guard",
+      "locator": "src/orders/refund-policy.ts:71",
+      "revision": "demo-c7a91",
+      "observedAt": "2026-11-02T08:00:00Z",
+      "freshness": "current",
+      "excerpt": "Fixture implementation does not atomically reserve refundable balance.",
+      "claimRelation": "supports",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "visibility": "allowed",
+      "confidenceLabel": "moderate"
+    },
+    {
+      "id": "ev-nova",
+      "connectorId": "cx-nova",
+      "resourceId": "res-nova",
+      "externalId": "NEED-41",
+      "sourceType": "nova",
+      "title": "Support-assisted refund demand",
+      "locator": "initiatives/NEED-41",
+      "revision": "demo-v1",
+      "observedAt": "2026-11-02T08:00:00Z",
+      "freshness": "current",
+      "excerpt": "Synthetic business need: reduce support intervention for partial refunds.",
+      "claimRelation": "supports",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "visibility": "allowed",
+      "confidenceLabel": "moderate"
+    }
+  ],
+  "tickets": [
+    {
+      "id": "PAY-217",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "title": "Historical full-refund scope",
+      "status": "historical",
+      "specId": null,
+      "specVersion": null,
+      "repositoryId": "repo-atlas-001",
+      "evidenceIds": [],
+      "dependsOn": [],
+      "acceptance": []
+    },
+    {
+      "id": "PAY-684",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "title": "Partial refund discovery",
+      "status": "historical",
+      "specId": null,
+      "specVersion": null,
+      "repositoryId": "repo-atlas-001",
+      "evidenceIds": [],
+      "dependsOn": [],
+      "acceptance": []
+    },
+    {
+      "id": "PAY-687",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "title": "Gateway capability investigation",
+      "status": "historical",
+      "specId": null,
+      "specVersion": null,
+      "repositoryId": "repo-atlas-001",
+      "evidenceIds": [],
+      "dependsOn": [],
+      "acceptance": []
+    },
+    {
+      "id": "PAY-688",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "title": "Capture balance query",
+      "status": "in_progress",
+      "specId": null,
+      "specVersion": null,
+      "repositoryId": "repo-atlas-001",
+      "evidenceIds": [],
+      "dependsOn": [],
+      "acceptance": []
+    },
+    {
+      "id": "PAY-689",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "title": "Ledger reversal mapping",
+      "status": "in_progress",
+      "specId": null,
+      "specVersion": null,
+      "repositoryId": "repo-atlas-001",
+      "evidenceIds": [],
+      "dependsOn": [],
+      "acceptance": []
+    },
+    {
+      "id": "PAY-690",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "title": "Seller refund permissions",
+      "status": "in_progress",
+      "specId": null,
+      "specVersion": null,
+      "repositoryId": "repo-atlas-002",
+      "evidenceIds": [],
+      "dependsOn": [],
+      "acceptance": []
+    },
+    {
+      "id": "PAY-691",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "title": "Payment owner handoff",
+      "status": "in_progress",
+      "specId": null,
+      "specVersion": null,
+      "repositoryId": "repo-atlas-003",
+      "evidenceIds": [],
+      "dependsOn": [],
+      "acceptance": []
+    },
+    {
+      "id": "PAY-692",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "title": "Order reservation design",
+      "status": "in_progress",
+      "specId": null,
+      "specVersion": null,
+      "repositoryId": "repo-atlas-004",
+      "evidenceIds": [],
+      "dependsOn": [],
+      "acceptance": []
+    },
+    {
+      "id": "draft-refund-1",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "title": "Validate payment amount and idempotency",
+      "status": "draft",
+      "specId": "spec-refund",
+      "specVersion": 1,
+      "repositoryId": "repo-atlas-001",
+      "evidenceIds": [
+        "ev-ticket",
+        "ev-doc",
+        "ev-code-payment",
+        "ev-code-order"
+      ],
+      "dependsOn": [],
+      "acceptance": [
+        "Given an invalid amount, when validated, then reject with actionable error.",
+        "Given a duplicate key, when retried, then return original result."
+      ],
+      "effortHours": [
+        6,
+        10
+      ],
+      "risks": [
+        "Gateway discovery may change scope."
+      ],
+      "testObligations": [
+        "Verify: Given an invalid amount, when validated, then reject with actionable error.",
+        "Verify: Given a duplicate key, when retried, then return original result."
+      ]
+    },
+    {
+      "id": "draft-refund-2",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "title": "Enforce cumulative cap atomically",
+      "status": "draft",
+      "specId": "spec-refund",
+      "specVersion": 1,
+      "repositoryId": "repo-atlas-002",
+      "evidenceIds": [
+        "ev-ticket",
+        "ev-doc",
+        "ev-code-payment",
+        "ev-code-order"
+      ],
+      "dependsOn": [
+        "draft-refund-1"
+      ],
+      "acceptance": [
+        "Given concurrent refunds, when reserving, then aggregate cannot exceed capture.",
+        "Given provider failure, when reconciled, then balance is consistent."
+      ],
+      "effortHours": [
+        8,
+        14
+      ],
+      "risks": [
+        "Gateway discovery may change scope."
+      ],
+      "testObligations": [
+        "Verify: Given concurrent refunds, when reserving, then aggregate cannot exceed capture.",
+        "Verify: Given provider failure, when reconciled, then balance is consistent."
+      ]
+    },
+    {
+      "id": "draft-refund-3",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "title": "Write partial ledger reversal",
+      "status": "draft",
+      "specId": "spec-refund",
+      "specVersion": 1,
+      "repositoryId": "repo-atlas-004",
+      "evidenceIds": [
+        "ev-ticket",
+        "ev-doc",
+        "ev-code-payment",
+        "ev-code-order"
+      ],
+      "dependsOn": [
+        "draft-refund-1"
+      ],
+      "acceptance": [
+        "Given refund success, when consuming event, then record one balanced reversal.",
+        "Given duplicate delivery, when replayed, then no second reversal."
+      ],
+      "effortHours": [
+        6,
+        10
+      ],
+      "risks": [
+        "Gateway discovery may change scope."
+      ],
+      "testObligations": [
+        "Verify: Given refund success, when consuming event, then record one balanced reversal.",
+        "Verify: Given duplicate delivery, when replayed, then no second reversal."
+      ]
+    },
+    {
+      "id": "draft-refund-4",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "title": "Seller refund amount form",
+      "status": "draft",
+      "specId": "spec-refund",
+      "specVersion": 1,
+      "repositoryId": "repo-atlas-003",
+      "evidenceIds": [
+        "ev-ticket",
+        "ev-doc",
+        "ev-code-payment",
+        "ev-code-order"
+      ],
+      "dependsOn": [
+        "draft-refund-1",
+        "draft-refund-2",
+        "draft-refund-3"
+      ],
+      "acceptance": [
+        "Given authorized seller, when entering amount, then remaining balance and errors are visible.",
+        "Given unauthorized seller, when viewing controls, then refund is unavailable with safe explanation."
+      ],
+      "effortHours": [
+        4,
+        6
+      ],
+      "risks": [
+        "Gateway discovery may change scope."
+      ],
+      "testObligations": [
+        "Verify: Given authorized seller, when entering amount, then remaining balance and errors are visible.",
+        "Verify: Given unauthorized seller, when viewing controls, then refund is unavailable with safe explanation."
+      ]
+    },
+    {
+      "id": "LAB-1",
+      "tenantId": "meridian",
+      "projectId": "m-project",
+      "title": "Lab fixture task 1",
+      "status": "draft",
+      "evidenceIds": []
+    },
+    {
+      "id": "LAB-2",
+      "tenantId": "meridian",
+      "projectId": "m-project",
+      "title": "Lab fixture task 2",
+      "status": "draft",
+      "evidenceIds": []
+    }
+  ],
+  "documents": [
+    {
+      "id": "doc-atlas-1",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "connectorId": "cx-confluence",
+      "resourceId": "res-confluence",
+      "title": "ADR-014 superseded",
+      "revision": "demo-doc-1",
+      "status": "stale",
+      "excerpt": "Synthetic architecture/documentation fixture."
+    },
+    {
+      "id": "doc-atlas-2",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "connectorId": "cx-confluence",
+      "resourceId": "res-confluence",
+      "title": "ADR-038 updated refund decision",
+      "revision": "demo-doc-2",
+      "status": "current",
+      "excerpt": "Synthetic architecture/documentation fixture."
+    },
+    {
+      "id": "doc-atlas-3",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "connectorId": "cx-confluence",
+      "resourceId": "res-confluence",
+      "title": "Commerce architecture",
+      "revision": "demo-doc-3",
+      "status": "current",
+      "excerpt": "Synthetic architecture/documentation fixture."
+    },
+    {
+      "id": "doc-atlas-4",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "connectorId": "cx-confluence",
+      "resourceId": "res-confluence",
+      "title": "Payment contracts",
+      "revision": "demo-doc-4",
+      "status": "current",
+      "excerpt": "Synthetic architecture/documentation fixture."
+    },
+    {
+      "id": "doc-atlas-5",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "connectorId": "cx-confluence",
+      "resourceId": "res-confluence",
+      "title": "Ledger rules",
+      "revision": "demo-doc-5",
+      "status": "current",
+      "excerpt": "Synthetic architecture/documentation fixture."
+    },
+    {
+      "id": "doc-atlas-6",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "connectorId": "cx-confluence",
+      "resourceId": "res-confluence",
+      "title": "Release checklist",
+      "revision": "demo-doc-6",
+      "status": "current",
+      "excerpt": "Synthetic architecture/documentation fixture."
+    },
+    {
+      "id": "doc-atlas-7",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "connectorId": "cx-confluence",
+      "resourceId": "res-confluence",
+      "title": "Ownership map",
+      "revision": "demo-doc-7",
+      "status": "current",
+      "excerpt": "Synthetic architecture/documentation fixture."
+    },
+    {
+      "id": "doc-atlas-8",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "connectorId": "cx-confluence",
+      "resourceId": "res-restricted",
+      "title": "Restricted resource",
+      "revision": "demo-doc-8",
+      "status": "restricted",
+      "excerpt": ""
+    },
+    {
+      "id": "doc-meridian-1",
+      "tenantId": "meridian",
+      "projectId": "m-project",
+      "title": "Labs documentation 1",
+      "revision": "demo-v1",
+      "status": "current"
+    },
+    {
+      "id": "doc-meridian-2",
+      "tenantId": "meridian",
+      "projectId": "m-project",
+      "title": "Labs documentation 2",
+      "revision": "demo-v1",
+      "status": "current"
+    }
+  ],
+  "requests": [
+    {
+      "id": "req-refund",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "outcome": "Allow sellers to issue partial refunds without exceeding captured amounts.",
+      "constraints": [
+        "Preserve idempotency",
+        "Maintain ledger consistency"
+      ],
+      "excludedScope": [
+        "Tax recalculation redesign"
+      ],
+      "status": "clarification"
+    },
+    {
+      "id": "req-bug",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "outcome": "Investigate duplicate refund handling.",
+      "constraints": [
+        "Read-only investigation"
+      ],
+      "excludedScope": [
+        "Provider migration"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "req-seller",
+      "tenantId": "atlas",
+      "projectId": "seller",
+      "outcome": "Clarify seller refund permission errors.",
+      "constraints": [],
+      "excludedScope": [],
+      "status": "draft"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "spec-refund",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "kind": "spec",
+      "version": 1,
+      "contentHash": "demo-checksum-spec-1",
+      "status": "superseded",
+      "authorId": "jonas",
+      "evidenceIds": [
+        "ev-ticket",
+        "ev-doc",
+        "ev-code-payment",
+        "ev-code-order",
+        "ev-nova"
+      ],
+      "inputRefs": [],
+      "unresolvedQuestions": [
+        "Per line item or order amount?"
+      ],
+      "scope": "Pending clarification",
+      "content": {
+        "title": "Order-level partial refunds",
+        "businessOutcome": "Reduce support-assisted refunds while preserving captured-balance and ledger correctness.",
+        "successMetric": "Illustrative: support-assisted partial refunds per week; baseline and target require business validation.",
+        "currentBehavior": "Historical full-refund-only policy conflicts with a newer amount request field. Atomic cumulative reservation is absent in the code fixture.",
+        "inScope": [
+          "Scope pending required clarification"
+        ],
+        "outOfScope": [
+          "Per-line-item refund allocation",
+          "Tax redesign",
+          "Payment-provider migration"
+        ],
+        "businessRules": [
+          "Positive integer minor units in captured currency",
+          "Sum of committed and reserved refunds may not exceed captured amount",
+          "Duplicate idempotency key must not create duplicate refund"
+        ],
+        "impact": [
+          "payment-api",
+          "order-service",
+          "ledger-worker",
+          "seller-web"
+        ],
+        "dependencies": [
+          "Verify payment gateway amount/idempotency semantics",
+          "Agree reservation/ledger event contract"
+        ],
+        "acceptance": [
+          {
+            "given": "10000 minor units captured and 3000 already refunded",
+            "when": "Seller requests 2000",
+            "then": "Eligible refund accepted; remaining committed balance becomes 5000"
+          },
+          {
+            "given": "Concurrent requests exceed remaining balance in aggregate",
+            "when": "Both reserve refundable balance",
+            "then": "Atomic guard prevents exceeding capture"
+          },
+          {
+            "given": "Same idempotency key retried",
+            "when": "Request is repeated",
+            "then": "Original result returned without duplicate reversal"
+          }
+        ],
+        "testPlan": [
+          "Boundary/negative/currency validation",
+          "Concurrent reservation contract",
+          "Idempotency retry contract",
+          "Ledger reconciliation",
+          "Permission/form checks"
+        ],
+        "security": "Use existing seller authorization; isolate seller order amounts.",
+        "observability": "Fixture request, reservation, provider and ledger correlation IDs; redact personal data.",
+        "releasePlan": "Staging preview, current CI, independent approval, gradual production simulation.",
+        "rollbackPlan": "Disable fixture flag and inspect reservation/reconciliation plan; no real payment reversal.",
+        "effortHours": [
+          24,
+          40
+        ],
+        "assumptions": [
+          "Gateway semantics unverified",
+          "Provider migration excluded"
+        ],
+        "evidenceIds": [
+          "ev-ticket",
+          "ev-doc",
+          "ev-code-payment",
+          "ev-code-order",
+          "ev-nova"
+        ]
+      }
+    },
+    {
+      "id": "spec-refund",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "kind": "spec",
+      "version": 2,
+      "contentHash": "demo-checksum-spec-2",
+      "status": "draft",
+      "authorId": "jonas",
+      "evidenceIds": [
+        "ev-ticket",
+        "ev-doc",
+        "ev-code-payment",
+        "ev-code-order",
+        "ev-nova"
+      ],
+      "inputRefs": [],
+      "unresolvedQuestions": [],
+      "scope": "Order-level amount only; per-line-item refund excluded",
+      "content": {
+        "title": "Order-level partial refunds",
+        "businessOutcome": "Reduce support-assisted refunds while preserving captured-balance and ledger correctness.",
+        "successMetric": "Illustrative: support-assisted partial refunds per week; baseline and target require business validation.",
+        "currentBehavior": "Historical full-refund-only policy conflicts with a newer amount request field. Atomic cumulative reservation is absent in the code fixture.",
+        "inScope": [
+          "Order-level partial amount",
+          "Cumulative balance cap",
+          "Idempotent retries",
+          "Ledger reversal",
+          "Seller permission/error states"
+        ],
+        "outOfScope": [
+          "Per-line-item refund allocation",
+          "Tax redesign",
+          "Payment-provider migration"
+        ],
+        "businessRules": [
+          "Positive integer minor units in captured currency",
+          "Sum of committed and reserved refunds may not exceed captured amount",
+          "Duplicate idempotency key must not create duplicate refund"
+        ],
+        "impact": [
+          "payment-api",
+          "order-service",
+          "ledger-worker",
+          "seller-web"
+        ],
+        "dependencies": [
+          "Verify payment gateway amount/idempotency semantics",
+          "Agree reservation/ledger event contract"
+        ],
+        "acceptance": [
+          {
+            "given": "10000 minor units captured and 3000 already refunded",
+            "when": "Seller requests 2000",
+            "then": "Eligible refund accepted; remaining committed balance becomes 5000"
+          },
+          {
+            "given": "Concurrent requests exceed remaining balance in aggregate",
+            "when": "Both reserve refundable balance",
+            "then": "Atomic guard prevents exceeding capture"
+          },
+          {
+            "given": "Same idempotency key retried",
+            "when": "Request is repeated",
+            "then": "Original result returned without duplicate reversal"
+          }
+        ],
+        "testPlan": [
+          "Boundary/negative/currency validation",
+          "Concurrent reservation contract",
+          "Idempotency retry contract",
+          "Ledger reconciliation",
+          "Permission/form checks"
+        ],
+        "security": "Use existing seller authorization; isolate seller order amounts.",
+        "observability": "Fixture request, reservation, provider and ledger correlation IDs; redact personal data.",
+        "releasePlan": "Staging preview, current CI, independent approval, gradual production simulation.",
+        "rollbackPlan": "Disable fixture flag and inspect reservation/reconciliation plan; no real payment reversal.",
+        "effortHours": [
+          24,
+          40
+        ],
+        "assumptions": [
+          "Gateway semantics unverified",
+          "Provider migration excluded"
+        ],
+        "evidenceIds": [
+          "ev-ticket",
+          "ev-doc",
+          "ev-code-payment",
+          "ev-code-order",
+          "ev-nova"
+        ]
+      }
+    }
+  ],
+  "skills": [
+    {
+      "id": "skill-spec",
+      "tenantId": "atlas",
+      "name": "Evidence-first specification",
+      "scope": "tenant",
+      "ownerId": "lea",
+      "version": 1,
+      "permittedStages": [
+        "business",
+        "product"
+      ],
+      "requiredCapabilities": [],
+      "inputSchemaVersion": "demo.input.v1",
+      "outputSchemaVersion": "demo.output.v1",
+      "status": "published"
+    },
+    {
+      "id": "skill-impact",
+      "tenantId": "atlas",
+      "name": "Commerce impact map",
+      "scope": "team",
+      "ownerId": "elena",
+      "version": 1,
+      "permittedStages": [
+        "code"
+      ],
+      "requiredCapabilities": [],
+      "inputSchemaVersion": "demo.input.v1",
+      "outputSchemaVersion": "demo.output.v1",
+      "status": "published"
+    },
+    {
+      "id": "skill-review",
+      "tenantId": "atlas",
+      "name": "Payment safety review",
+      "scope": "team",
+      "ownerId": "omar",
+      "version": 1,
+      "permittedStages": [
+        "review"
+      ],
+      "requiredCapabilities": [],
+      "inputSchemaVersion": "demo.input.v1",
+      "outputSchemaVersion": "demo.output.v1",
+      "status": "published"
+    },
+    {
+      "id": "skill-tickets",
+      "tenantId": "atlas",
+      "name": "Ticket normalization",
+      "scope": "tenant",
+      "ownerId": "lea",
+      "version": 1,
+      "permittedStages": [
+        "product"
+      ],
+      "requiredCapabilities": [],
+      "inputSchemaVersion": "demo.input.v1",
+      "outputSchemaVersion": "demo.output.v1",
+      "status": "published"
+    },
+    {
+      "id": "skill-release",
+      "tenantId": "atlas",
+      "name": "Release readiness",
+      "scope": "project",
+      "ownerId": "lea",
+      "version": 1,
+      "permittedStages": [
+        "deploy"
+      ],
+      "requiredCapabilities": [],
+      "inputSchemaVersion": "demo.input.v1",
+      "outputSchemaVersion": "demo.output.v1",
+      "status": "published"
+    },
+    {
+      "id": "skill-private",
+      "tenantId": "atlas",
+      "name": "Personal investigation notes",
+      "scope": "private",
+      "ownerId": "nima",
+      "version": 1,
+      "permittedStages": [
+        "business"
+      ],
+      "requiredCapabilities": [],
+      "inputSchemaVersion": "demo.input.v1",
+      "outputSchemaVersion": "demo.output.v1",
+      "status": "published"
+    }
+  ],
+  "capacity": [
+    {
+      "memberId": "sara",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "timezone": "Europe/Berlin",
+      "startDate": "2026-11-03",
+      "workdays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "availableHoursPerDay": 6,
+      "effortHours": [
+        24,
+        40
+      ],
+      "overheadHours": 0,
+      "leaveDates": [
+        "2026-11-05",
+        "2026-11-06"
+      ],
+      "note": "Synthetic planning inputs; not employee performance data."
+    },
+    {
+      "memberId": "nima",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "timezone": "Europe/Berlin",
+      "startDate": "2026-11-03",
+      "workdays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "availableHoursPerDay": 4,
+      "effortHours": [
+        24,
+        40
+      ],
+      "overheadHours": 0,
+      "leaveDates": [],
+      "note": "Synthetic planning inputs; not employee performance data."
+    },
+    {
+      "memberId": "elena",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "timezone": "Europe/Berlin",
+      "startDate": "2026-11-03",
+      "workdays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "availableHoursPerDay": 5,
+      "effortHours": [
+        24,
+        40
+      ],
+      "overheadHours": 8,
+      "leaveDates": [],
+      "note": "Synthetic planning inputs; not employee performance data."
+    }
+  ],
+  "audit": [
+    {
+      "id": "audit-001",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "actorId": "lea",
+      "action": "demo_project_created",
+      "targetId": "refunds",
+      "outcome": "simulated",
+      "timestamp": "2026-11-02T08:00:00.000Z"
+    },
+    {
+      "id": "audit-002",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "actorId": "elena",
+      "action": "binding_configured",
+      "targetId": "bind-code",
+      "outcome": "simulated",
+      "timestamp": "2026-11-02T08:01:00.000Z"
+    },
+    {
+      "id": "audit-003",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "actorId": "omar",
+      "action": "workflow_published",
+      "targetId": "wf-evidence",
+      "outcome": "simulated",
+      "timestamp": "2026-11-02T08:02:00.000Z"
+    },
+    {
+      "id": "audit-004",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "actorId": "jonas",
+      "action": "spec_previewed",
+      "targetId": "spec-refund",
+      "outcome": "simulated",
+      "timestamp": "2026-11-02T08:03:00.000Z"
+    },
+    {
+      "id": "audit-005",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "actorId": "lea",
+      "action": "gate_blocked",
+      "targetId": "gate-scope",
+      "outcome": "blocked",
+      "timestamp": "2026-11-02T08:04:00.000Z"
+    },
+    {
+      "id": "audit-006",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "actorId": "elena",
+      "action": "demo_project_created",
+      "targetId": "refunds",
+      "outcome": "simulated",
+      "timestamp": "2026-11-02T08:05:00.000Z"
+    },
+    {
+      "id": "audit-007",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "actorId": "omar",
+      "action": "binding_configured",
+      "targetId": "bind-code",
+      "outcome": "simulated",
+      "timestamp": "2026-11-02T08:06:00.000Z"
+    },
+    {
+      "id": "audit-008",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "actorId": "jonas",
+      "action": "workflow_published",
+      "targetId": "wf-evidence",
+      "outcome": "simulated",
+      "timestamp": "2026-11-02T08:07:00.000Z"
+    },
+    {
+      "id": "audit-009",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "actorId": "lea",
+      "action": "spec_previewed",
+      "targetId": "spec-refund",
+      "outcome": "simulated",
+      "timestamp": "2026-11-02T08:08:00.000Z"
+    },
+    {
+      "id": "audit-010",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "actorId": "elena",
+      "action": "gate_blocked",
+      "targetId": "gate-scope",
+      "outcome": "blocked",
+      "timestamp": "2026-11-02T08:09:00.000Z"
+    },
+    {
+      "id": "audit-011",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "actorId": "omar",
+      "action": "demo_project_created",
+      "targetId": "refunds",
+      "outcome": "simulated",
+      "timestamp": "2026-11-02T08:10:00.000Z"
+    },
+    {
+      "id": "audit-012",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "actorId": "jonas",
+      "action": "binding_configured",
+      "targetId": "bind-code",
+      "outcome": "simulated",
+      "timestamp": "2026-11-02T08:11:00.000Z"
+    },
+    {
+      "id": "audit-013",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "actorId": "lea",
+      "action": "workflow_published",
+      "targetId": "wf-evidence",
+      "outcome": "simulated",
+      "timestamp": "2026-11-02T08:12:00.000Z"
+    },
+    {
+      "id": "audit-014",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "actorId": "elena",
+      "action": "spec_previewed",
+      "targetId": "spec-refund",
+      "outcome": "simulated",
+      "timestamp": "2026-11-02T08:13:00.000Z"
+    },
+    {
+      "id": "audit-015",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "actorId": "omar",
+      "action": "gate_blocked",
+      "targetId": "gate-scope",
+      "outcome": "blocked",
+      "timestamp": "2026-11-02T08:14:00.000Z"
+    },
+    {
+      "id": "audit-016",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "actorId": "jonas",
+      "action": "demo_project_created",
+      "targetId": "refunds",
+      "outcome": "simulated",
+      "timestamp": "2026-11-02T08:15:00.000Z"
+    },
+    {
+      "id": "audit-017",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "actorId": "lea",
+      "action": "binding_configured",
+      "targetId": "bind-code",
+      "outcome": "simulated",
+      "timestamp": "2026-11-02T08:16:00.000Z"
+    },
+    {
+      "id": "audit-018",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "actorId": "elena",
+      "action": "workflow_published",
+      "targetId": "wf-evidence",
+      "outcome": "simulated",
+      "timestamp": "2026-11-02T08:17:00.000Z"
+    },
+    {
+      "id": "audit-019",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "actorId": "omar",
+      "action": "spec_previewed",
+      "targetId": "spec-refund",
+      "outcome": "simulated",
+      "timestamp": "2026-11-02T08:18:00.000Z"
+    },
+    {
+      "id": "audit-020",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "actorId": "jonas",
+      "action": "gate_blocked",
+      "targetId": "gate-scope",
+      "outcome": "blocked",
+      "timestamp": "2026-11-02T08:19:00.000Z"
+    }
+  ]
+}

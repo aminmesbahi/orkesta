@@ -1,0 +1,1815 @@
+{
+  "note": "Seller and Labs templates require configuring local bindings before publish/simulate.",
+  "workflows": [
+    {
+      "id": "wf-evidence",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "name": "Evidence-first delivery",
+      "version": 1,
+      "status": "published",
+      "nodes": [
+        {
+          "id": "trigger",
+          "type": "trigger",
+          "stage": "business",
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "data": {
+            "label": "Business request",
+            "outputKey": "request",
+            "bindingIds": [],
+            "inputMappings": {},
+            "config": {},
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "tickets",
+          "type": "retrieve_tickets",
+          "stage": "business",
+          "position": {
+            "x": 0,
+            "y": 155
+          },
+          "data": {
+            "label": "Find similar Jira tickets",
+            "outputKey": "ticketEvidence",
+            "bindingIds": [
+              "bind-business"
+            ],
+            "inputMappings": {
+              "request": "request"
+            },
+            "config": {
+              "query": "partial refund",
+              "limit": 12
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 2
+          }
+        },
+        {
+          "id": "docs",
+          "type": "retrieve_docs",
+          "stage": "business",
+          "position": {
+            "x": 0,
+            "y": 310
+          },
+          "data": {
+            "label": "Read Confluence decisions",
+            "outputKey": "docEvidence",
+            "bindingIds": [
+              "bind-docs"
+            ],
+            "inputMappings": {
+              "request": "request",
+              "ticketEvidence": "ticketEvidence"
+            },
+            "config": {
+              "freshnessDays": 90
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 2
+          }
+        },
+        {
+          "id": "code-context",
+          "type": "inspect_code",
+          "stage": "business",
+          "position": {
+            "x": 0,
+            "y": 465
+          },
+          "data": {
+            "label": "Inspect targeted code",
+            "outputKey": "codeImpact",
+            "bindingIds": [
+              "bind-code"
+            ],
+            "inputMappings": {
+              "request": "request",
+              "docEvidence": "docEvidence",
+              "ticketEvidence": "ticketEvidence"
+            },
+            "config": {
+              "revision": "demo-c7a91",
+              "repositoryIds": [
+                "repo-atlas-001",
+                "repo-atlas-002",
+                "repo-atlas-003",
+                "repo-atlas-004"
+              ]
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "clarify",
+          "type": "clarify",
+          "stage": "business",
+          "position": {
+            "x": 0,
+            "y": 620
+          },
+          "data": {
+            "label": "Resolve scope conflict",
+            "outputKey": "answers",
+            "bindingIds": [],
+            "inputMappings": {
+              "request": "request",
+              "codeImpact": "codeImpact",
+              "docEvidence": "docEvidence"
+            },
+            "config": {
+              "question": "Per line item or order-level amount?",
+              "required": true
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "spec",
+          "type": "compose_spec",
+          "stage": "product",
+          "position": {
+            "x": 330,
+            "y": 0
+          },
+          "data": {
+            "label": "Compose normalized spec",
+            "outputKey": "specDraft",
+            "bindingIds": [],
+            "inputMappings": {
+              "request": "request",
+              "ticketEvidence": "ticketEvidence",
+              "docEvidence": "docEvidence",
+              "codeImpact": "codeImpact",
+              "answers": "answers"
+            },
+            "config": {
+              "skillId": "skill-spec",
+              "skillVersion": 1,
+              "template": "normalized-spec-v1"
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "scope-gate",
+          "type": "approval",
+          "stage": "product",
+          "position": {
+            "x": 330,
+            "y": 155
+          },
+          "data": {
+            "label": "Approve current spec",
+            "outputKey": "scopeDecision",
+            "bindingIds": [],
+            "inputMappings": {
+              "artifact": "specDraft"
+            },
+            "config": {
+              "role": "product_lead",
+              "artifactKey": "specDraft",
+              "independent": true,
+              "expiresHours": 24
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "capacity",
+          "type": "plan_capacity",
+          "stage": "product",
+          "position": {
+            "x": 330,
+            "y": 310
+          },
+          "data": {
+            "label": "Ticket and capacity plan",
+            "outputKey": "capacityProposal",
+            "bindingIds": [
+              "bind-capacity",
+              "bind-leave"
+            ],
+            "inputMappings": {
+              "spec": "specDraft",
+              "approval": "scopeDecision"
+            },
+            "config": {
+              "memberIds": [
+                "sara",
+                "nima",
+                "elena"
+              ]
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "implementation",
+          "type": "implement_preview",
+          "stage": "code",
+          "position": {
+            "x": 660,
+            "y": 0
+          },
+          "data": {
+            "label": "Implementation fixture",
+            "outputKey": "fakeDiff",
+            "bindingIds": [
+              "bind-code"
+            ],
+            "inputMappings": {
+              "spec": "specDraft",
+              "approval": "scopeDecision",
+              "plan": "capacityProposal"
+            },
+            "config": {
+              "runnerPreset": "local-fixture",
+              "authorId": "nima"
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "review",
+          "type": "review_preview",
+          "stage": "review",
+          "position": {
+            "x": 990,
+            "y": 0
+          },
+          "data": {
+            "label": "Independent review",
+            "outputKey": "reviewFindings",
+            "bindingIds": [
+              "bind-code"
+            ],
+            "inputMappings": {
+              "diff": "fakeDiff"
+            },
+            "config": {
+              "skillId": "skill-review",
+              "reviewerId": "omar"
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "review-gate",
+          "type": "approval",
+          "stage": "review",
+          "position": {
+            "x": 990,
+            "y": 155
+          },
+          "data": {
+            "label": "Review current diff",
+            "outputKey": "reviewDecision",
+            "bindingIds": [],
+            "inputMappings": {
+              "artifact": "fakeDiff",
+              "findings": "reviewFindings"
+            },
+            "config": {
+              "role": "reviewer",
+              "independent": true,
+              "artifactKey": "fakeDiff",
+              "blockedSeverity": [
+                "critical",
+                "high"
+              ]
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "ci",
+          "type": "ci_preview",
+          "stage": "ci",
+          "position": {
+            "x": 1320,
+            "y": 0
+          },
+          "data": {
+            "label": "CI fixture",
+            "outputKey": "ciReport",
+            "bindingIds": [
+              "bind-ci"
+            ],
+            "inputMappings": {
+              "diff": "fakeDiff",
+              "review": "reviewDecision"
+            },
+            "config": {
+              "suiteFixture": "refund-contract-tests"
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "release-gate",
+          "type": "approval",
+          "stage": "deploy",
+          "position": {
+            "x": 1650,
+            "y": 0
+          },
+          "data": {
+            "label": "Approve production preview",
+            "outputKey": "releaseDecision",
+            "bindingIds": [],
+            "inputMappings": {
+              "artifact": "fakeDiff",
+              "ci": "ciReport"
+            },
+            "config": {
+              "role": "release_approver",
+              "independent": true,
+              "requires": "ciReport.passed",
+              "artifactKey": "fakeDiff"
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "rollout",
+          "type": "deploy_preview",
+          "stage": "deploy",
+          "position": {
+            "x": 1650,
+            "y": 155
+          },
+          "data": {
+            "label": "Simulated rollout",
+            "outputKey": "releasePreview",
+            "bindingIds": [
+              "bind-deploy"
+            ],
+            "inputMappings": {
+              "ci": "ciReport",
+              "approval": "releaseDecision"
+            },
+            "config": {
+              "environment": "production",
+              "requires": [
+                "ciReport",
+                "releaseDecision"
+              ]
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "edge-trigger-tickets",
+          "source": "trigger",
+          "target": "tickets",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-tickets-docs",
+          "source": "tickets",
+          "target": "docs",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-docs-code-context",
+          "source": "docs",
+          "target": "code-context",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-code-context-clarify",
+          "source": "code-context",
+          "target": "clarify",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-clarify-spec",
+          "source": "clarify",
+          "target": "spec",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-spec-scope-gate",
+          "source": "spec",
+          "target": "scope-gate",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-scope-gate-capacity",
+          "source": "scope-gate",
+          "target": "capacity",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-capacity-implementation",
+          "source": "capacity",
+          "target": "implementation",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-implementation-review",
+          "source": "implementation",
+          "target": "review",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-review-review-gate",
+          "source": "review",
+          "target": "review-gate",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-review-gate-ci",
+          "source": "review-gate",
+          "target": "ci",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-ci-release-gate",
+          "source": "ci",
+          "target": "release-gate",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-release-gate-rollout",
+          "source": "release-gate",
+          "target": "rollout",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        }
+      ]
+    },
+    {
+      "id": "wf-evidence",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "name": "Evidence-first delivery",
+      "version": 2,
+      "status": "published",
+      "nodes": [
+        {
+          "id": "trigger",
+          "type": "trigger",
+          "stage": "business",
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "data": {
+            "label": "Business request",
+            "outputKey": "request",
+            "bindingIds": [],
+            "inputMappings": {},
+            "config": {},
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "tickets",
+          "type": "retrieve_tickets",
+          "stage": "business",
+          "position": {
+            "x": 0,
+            "y": 155
+          },
+          "data": {
+            "label": "Find similar Jira tickets",
+            "outputKey": "ticketEvidence",
+            "bindingIds": [
+              "bind-business"
+            ],
+            "inputMappings": {
+              "request": "request"
+            },
+            "config": {
+              "query": "partial refund",
+              "limit": 12
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 2
+          }
+        },
+        {
+          "id": "docs",
+          "type": "retrieve_docs",
+          "stage": "business",
+          "position": {
+            "x": 0,
+            "y": 310
+          },
+          "data": {
+            "label": "Read Confluence decisions",
+            "outputKey": "docEvidence",
+            "bindingIds": [
+              "bind-docs"
+            ],
+            "inputMappings": {
+              "request": "request",
+              "ticketEvidence": "ticketEvidence"
+            },
+            "config": {
+              "freshnessDays": 30
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 2
+          }
+        },
+        {
+          "id": "code-context",
+          "type": "inspect_code",
+          "stage": "business",
+          "position": {
+            "x": 0,
+            "y": 465
+          },
+          "data": {
+            "label": "Inspect targeted code",
+            "outputKey": "codeImpact",
+            "bindingIds": [
+              "bind-code"
+            ],
+            "inputMappings": {
+              "request": "request",
+              "docEvidence": "docEvidence",
+              "ticketEvidence": "ticketEvidence"
+            },
+            "config": {
+              "revision": "demo-c7a91",
+              "repositoryIds": [
+                "repo-atlas-001",
+                "repo-atlas-002",
+                "repo-atlas-003",
+                "repo-atlas-004"
+              ]
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "clarify",
+          "type": "clarify",
+          "stage": "business",
+          "position": {
+            "x": 0,
+            "y": 620
+          },
+          "data": {
+            "label": "Resolve scope conflict",
+            "outputKey": "answers",
+            "bindingIds": [],
+            "inputMappings": {
+              "request": "request",
+              "codeImpact": "codeImpact",
+              "docEvidence": "docEvidence"
+            },
+            "config": {
+              "question": "Per line item or order-level amount?",
+              "required": true
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "spec",
+          "type": "compose_spec",
+          "stage": "product",
+          "position": {
+            "x": 330,
+            "y": 0
+          },
+          "data": {
+            "label": "Compose normalized spec",
+            "outputKey": "specDraft",
+            "bindingIds": [],
+            "inputMappings": {
+              "request": "request",
+              "ticketEvidence": "ticketEvidence",
+              "docEvidence": "docEvidence",
+              "codeImpact": "codeImpact",
+              "answers": "answers"
+            },
+            "config": {
+              "skillId": "skill-spec",
+              "skillVersion": 1,
+              "template": "normalized-spec-v1"
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "scope-gate",
+          "type": "approval",
+          "stage": "product",
+          "position": {
+            "x": 330,
+            "y": 155
+          },
+          "data": {
+            "label": "Approve current spec",
+            "outputKey": "scopeDecision",
+            "bindingIds": [],
+            "inputMappings": {
+              "artifact": "specDraft"
+            },
+            "config": {
+              "role": "product_lead",
+              "artifactKey": "specDraft",
+              "independent": true,
+              "expiresHours": 24
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "capacity",
+          "type": "plan_capacity",
+          "stage": "product",
+          "position": {
+            "x": 330,
+            "y": 310
+          },
+          "data": {
+            "label": "Ticket and capacity plan",
+            "outputKey": "capacityProposal",
+            "bindingIds": [
+              "bind-capacity",
+              "bind-leave"
+            ],
+            "inputMappings": {
+              "spec": "specDraft",
+              "approval": "scopeDecision"
+            },
+            "config": {
+              "memberIds": [
+                "sara",
+                "nima",
+                "elena"
+              ]
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "implementation",
+          "type": "implement_preview",
+          "stage": "code",
+          "position": {
+            "x": 660,
+            "y": 0
+          },
+          "data": {
+            "label": "Implementation fixture",
+            "outputKey": "fakeDiff",
+            "bindingIds": [
+              "bind-code"
+            ],
+            "inputMappings": {
+              "spec": "specDraft",
+              "approval": "scopeDecision",
+              "plan": "capacityProposal"
+            },
+            "config": {
+              "runnerPreset": "local-fixture",
+              "authorId": "nima"
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "review",
+          "type": "review_preview",
+          "stage": "review",
+          "position": {
+            "x": 990,
+            "y": 0
+          },
+          "data": {
+            "label": "Independent review",
+            "outputKey": "reviewFindings",
+            "bindingIds": [
+              "bind-code"
+            ],
+            "inputMappings": {
+              "diff": "fakeDiff"
+            },
+            "config": {
+              "skillId": "skill-review",
+              "reviewerId": "omar"
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "review-gate",
+          "type": "approval",
+          "stage": "review",
+          "position": {
+            "x": 990,
+            "y": 155
+          },
+          "data": {
+            "label": "Review current diff",
+            "outputKey": "reviewDecision",
+            "bindingIds": [],
+            "inputMappings": {
+              "artifact": "fakeDiff",
+              "findings": "reviewFindings"
+            },
+            "config": {
+              "role": "reviewer",
+              "independent": true,
+              "artifactKey": "fakeDiff",
+              "blockedSeverity": [
+                "critical",
+                "high"
+              ]
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "ci",
+          "type": "ci_preview",
+          "stage": "ci",
+          "position": {
+            "x": 1320,
+            "y": 0
+          },
+          "data": {
+            "label": "CI fixture",
+            "outputKey": "ciReport",
+            "bindingIds": [
+              "bind-ci"
+            ],
+            "inputMappings": {
+              "diff": "fakeDiff",
+              "review": "reviewDecision"
+            },
+            "config": {
+              "suiteFixture": "refund-contract-tests"
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "release-gate",
+          "type": "approval",
+          "stage": "deploy",
+          "position": {
+            "x": 1650,
+            "y": 0
+          },
+          "data": {
+            "label": "Approve production preview",
+            "outputKey": "releaseDecision",
+            "bindingIds": [],
+            "inputMappings": {
+              "artifact": "fakeDiff",
+              "ci": "ciReport"
+            },
+            "config": {
+              "role": "release_approver",
+              "independent": true,
+              "requires": "ciReport.passed",
+              "artifactKey": "fakeDiff"
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "rollout",
+          "type": "deploy_preview",
+          "stage": "deploy",
+          "position": {
+            "x": 1650,
+            "y": 155
+          },
+          "data": {
+            "label": "Simulated rollout",
+            "outputKey": "releasePreview",
+            "bindingIds": [
+              "bind-deploy"
+            ],
+            "inputMappings": {
+              "ci": "ciReport",
+              "approval": "releaseDecision"
+            },
+            "config": {
+              "environment": "production",
+              "requires": [
+                "ciReport",
+                "releaseDecision"
+              ]
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "edge-trigger-tickets",
+          "source": "trigger",
+          "target": "tickets",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-tickets-docs",
+          "source": "tickets",
+          "target": "docs",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-docs-code-context",
+          "source": "docs",
+          "target": "code-context",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-code-context-clarify",
+          "source": "code-context",
+          "target": "clarify",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-clarify-spec",
+          "source": "clarify",
+          "target": "spec",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-spec-scope-gate",
+          "source": "spec",
+          "target": "scope-gate",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-scope-gate-capacity",
+          "source": "scope-gate",
+          "target": "capacity",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-capacity-implementation",
+          "source": "capacity",
+          "target": "implementation",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-implementation-review",
+          "source": "implementation",
+          "target": "review",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-review-review-gate",
+          "source": "review",
+          "target": "review-gate",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-review-gate-ci",
+          "source": "review-gate",
+          "target": "ci",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-ci-release-gate",
+          "source": "ci",
+          "target": "release-gate",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-release-gate-rollout",
+          "source": "release-gate",
+          "target": "rollout",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        }
+      ]
+    },
+    {
+      "id": "wf-seller",
+      "tenantId": "atlas",
+      "projectId": "seller",
+      "name": "Seller feature delivery",
+      "version": 1,
+      "status": "published",
+      "nodes": [
+        {
+          "id": "trigger",
+          "type": "trigger",
+          "stage": "business",
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "data": {
+            "label": "Business request",
+            "outputKey": "request",
+            "bindingIds": [],
+            "inputMappings": {},
+            "config": {},
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "tickets",
+          "type": "retrieve_tickets",
+          "stage": "business",
+          "position": {
+            "x": 0,
+            "y": 155
+          },
+          "data": {
+            "label": "Find similar Jira tickets",
+            "outputKey": "ticketEvidence",
+            "bindingIds": [],
+            "inputMappings": {
+              "request": "request"
+            },
+            "config": {
+              "query": "partial refund",
+              "limit": 12
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 2
+          }
+        },
+        {
+          "id": "docs",
+          "type": "retrieve_docs",
+          "stage": "business",
+          "position": {
+            "x": 0,
+            "y": 310
+          },
+          "data": {
+            "label": "Read Confluence decisions",
+            "outputKey": "docEvidence",
+            "bindingIds": [],
+            "inputMappings": {
+              "request": "request",
+              "ticketEvidence": "ticketEvidence"
+            },
+            "config": {
+              "freshnessDays": 90
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 2
+          }
+        },
+        {
+          "id": "code-context",
+          "type": "inspect_code",
+          "stage": "business",
+          "position": {
+            "x": 0,
+            "y": 465
+          },
+          "data": {
+            "label": "Inspect targeted code",
+            "outputKey": "codeImpact",
+            "bindingIds": [],
+            "inputMappings": {
+              "request": "request",
+              "docEvidence": "docEvidence",
+              "ticketEvidence": "ticketEvidence"
+            },
+            "config": {
+              "revision": "demo-c7a91",
+              "repositoryIds": [
+                "repo-atlas-001",
+                "repo-atlas-002",
+                "repo-atlas-003",
+                "repo-atlas-004"
+              ]
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "clarify",
+          "type": "clarify",
+          "stage": "business",
+          "position": {
+            "x": 0,
+            "y": 620
+          },
+          "data": {
+            "label": "Resolve scope conflict",
+            "outputKey": "answers",
+            "bindingIds": [],
+            "inputMappings": {
+              "request": "request",
+              "codeImpact": "codeImpact",
+              "docEvidence": "docEvidence"
+            },
+            "config": {
+              "question": "Per line item or order-level amount?",
+              "required": true
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "spec",
+          "type": "compose_spec",
+          "stage": "product",
+          "position": {
+            "x": 330,
+            "y": 0
+          },
+          "data": {
+            "label": "Compose normalized spec",
+            "outputKey": "specDraft",
+            "bindingIds": [],
+            "inputMappings": {
+              "request": "request",
+              "ticketEvidence": "ticketEvidence",
+              "docEvidence": "docEvidence",
+              "codeImpact": "codeImpact",
+              "answers": "answers"
+            },
+            "config": {
+              "skillId": "skill-spec",
+              "skillVersion": 1,
+              "template": "normalized-spec-v1"
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "scope-gate",
+          "type": "approval",
+          "stage": "product",
+          "position": {
+            "x": 330,
+            "y": 155
+          },
+          "data": {
+            "label": "Approve current spec",
+            "outputKey": "scopeDecision",
+            "bindingIds": [],
+            "inputMappings": {
+              "artifact": "specDraft"
+            },
+            "config": {
+              "role": "product_lead",
+              "artifactKey": "specDraft",
+              "independent": true,
+              "expiresHours": 24
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "capacity",
+          "type": "plan_capacity",
+          "stage": "product",
+          "position": {
+            "x": 330,
+            "y": 310
+          },
+          "data": {
+            "label": "Ticket and capacity plan",
+            "outputKey": "capacityProposal",
+            "bindingIds": [],
+            "inputMappings": {
+              "spec": "specDraft",
+              "approval": "scopeDecision"
+            },
+            "config": {
+              "memberIds": [
+                "sara",
+                "nima",
+                "elena"
+              ]
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "implementation",
+          "type": "implement_preview",
+          "stage": "code",
+          "position": {
+            "x": 660,
+            "y": 0
+          },
+          "data": {
+            "label": "Implementation fixture",
+            "outputKey": "fakeDiff",
+            "bindingIds": [],
+            "inputMappings": {
+              "spec": "specDraft",
+              "approval": "scopeDecision",
+              "plan": "capacityProposal"
+            },
+            "config": {
+              "runnerPreset": "local-fixture",
+              "authorId": "nima"
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "review",
+          "type": "review_preview",
+          "stage": "review",
+          "position": {
+            "x": 990,
+            "y": 0
+          },
+          "data": {
+            "label": "Independent review",
+            "outputKey": "reviewFindings",
+            "bindingIds": [],
+            "inputMappings": {
+              "diff": "fakeDiff"
+            },
+            "config": {
+              "skillId": "skill-review",
+              "reviewerId": "omar"
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "review-gate",
+          "type": "approval",
+          "stage": "review",
+          "position": {
+            "x": 990,
+            "y": 155
+          },
+          "data": {
+            "label": "Review current diff",
+            "outputKey": "reviewDecision",
+            "bindingIds": [],
+            "inputMappings": {
+              "artifact": "fakeDiff",
+              "findings": "reviewFindings"
+            },
+            "config": {
+              "role": "reviewer",
+              "independent": true,
+              "artifactKey": "fakeDiff",
+              "blockedSeverity": [
+                "critical",
+                "high"
+              ]
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "ci",
+          "type": "ci_preview",
+          "stage": "ci",
+          "position": {
+            "x": 1320,
+            "y": 0
+          },
+          "data": {
+            "label": "CI fixture",
+            "outputKey": "ciReport",
+            "bindingIds": [],
+            "inputMappings": {
+              "diff": "fakeDiff",
+              "review": "reviewDecision"
+            },
+            "config": {
+              "suiteFixture": "refund-contract-tests"
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "release-gate",
+          "type": "approval",
+          "stage": "deploy",
+          "position": {
+            "x": 1650,
+            "y": 0
+          },
+          "data": {
+            "label": "Approve production preview",
+            "outputKey": "releaseDecision",
+            "bindingIds": [],
+            "inputMappings": {
+              "artifact": "fakeDiff",
+              "ci": "ciReport"
+            },
+            "config": {
+              "role": "release_approver",
+              "independent": true,
+              "requires": "ciReport.passed",
+              "artifactKey": "fakeDiff"
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "rollout",
+          "type": "deploy_preview",
+          "stage": "deploy",
+          "position": {
+            "x": 1650,
+            "y": 155
+          },
+          "data": {
+            "label": "Simulated rollout",
+            "outputKey": "releasePreview",
+            "bindingIds": [],
+            "inputMappings": {
+              "ci": "ciReport",
+              "approval": "releaseDecision"
+            },
+            "config": {
+              "environment": "production",
+              "requires": [
+                "ciReport",
+                "releaseDecision"
+              ]
+            },
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "edge-trigger-tickets",
+          "source": "trigger",
+          "target": "tickets",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-tickets-docs",
+          "source": "tickets",
+          "target": "docs",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-docs-code-context",
+          "source": "docs",
+          "target": "code-context",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-code-context-clarify",
+          "source": "code-context",
+          "target": "clarify",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-clarify-spec",
+          "source": "clarify",
+          "target": "spec",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-spec-scope-gate",
+          "source": "spec",
+          "target": "scope-gate",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-scope-gate-capacity",
+          "source": "scope-gate",
+          "target": "capacity",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-capacity-implementation",
+          "source": "capacity",
+          "target": "implementation",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-implementation-review",
+          "source": "implementation",
+          "target": "review",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-review-review-gate",
+          "source": "review",
+          "target": "review-gate",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-review-gate-ci",
+          "source": "review-gate",
+          "target": "ci",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-ci-release-gate",
+          "source": "ci",
+          "target": "release-gate",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-release-gate-rollout",
+          "source": "release-gate",
+          "target": "rollout",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        }
+      ]
+    },
+    {
+      "id": "wf-labs",
+      "tenantId": "meridian",
+      "projectId": "m-project",
+      "name": "Labs planning",
+      "version": 1,
+      "status": "published",
+      "nodes": [
+        {
+          "id": "trigger",
+          "type": "trigger",
+          "stage": "business",
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "data": {
+            "label": "Business request",
+            "outputKey": "request",
+            "bindingIds": [],
+            "inputMappings": {},
+            "config": {},
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "tickets",
+          "type": "retrieve_tickets",
+          "stage": "business",
+          "position": {
+            "x": 0,
+            "y": 155
+          },
+          "data": {
+            "label": "Find similar Jira tickets",
+            "outputKey": "ticketEvidence",
+            "bindingIds": [],
+            "inputMappings": {
+              "request": "request"
+            },
+            "config": {},
+            "timeoutSeconds": 60,
+            "maxRetries": 2
+          }
+        },
+        {
+          "id": "docs",
+          "type": "retrieve_docs",
+          "stage": "business",
+          "position": {
+            "x": 0,
+            "y": 310
+          },
+          "data": {
+            "label": "Read Confluence decisions",
+            "outputKey": "docEvidence",
+            "bindingIds": [],
+            "inputMappings": {
+              "request": "request",
+              "ticketEvidence": "ticketEvidence"
+            },
+            "config": {},
+            "timeoutSeconds": 60,
+            "maxRetries": 2
+          }
+        },
+        {
+          "id": "code-context",
+          "type": "inspect_code",
+          "stage": "business",
+          "position": {
+            "x": 0,
+            "y": 465
+          },
+          "data": {
+            "label": "Inspect targeted code",
+            "outputKey": "codeImpact",
+            "bindingIds": [],
+            "inputMappings": {
+              "request": "request",
+              "docEvidence": "docEvidence",
+              "ticketEvidence": "ticketEvidence"
+            },
+            "config": {},
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "clarify",
+          "type": "clarify",
+          "stage": "business",
+          "position": {
+            "x": 0,
+            "y": 620
+          },
+          "data": {
+            "label": "Resolve scope conflict",
+            "outputKey": "answers",
+            "bindingIds": [],
+            "inputMappings": {
+              "request": "request",
+              "codeImpact": "codeImpact",
+              "docEvidence": "docEvidence"
+            },
+            "config": {},
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "spec",
+          "type": "compose_spec",
+          "stage": "product",
+          "position": {
+            "x": 330,
+            "y": 0
+          },
+          "data": {
+            "label": "Compose normalized spec",
+            "outputKey": "specDraft",
+            "bindingIds": [],
+            "inputMappings": {
+              "request": "request",
+              "ticketEvidence": "ticketEvidence",
+              "docEvidence": "docEvidence",
+              "codeImpact": "codeImpact",
+              "answers": "answers"
+            },
+            "config": {},
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "scope-gate",
+          "type": "approval",
+          "stage": "product",
+          "position": {
+            "x": 330,
+            "y": 155
+          },
+          "data": {
+            "label": "Approve current spec",
+            "outputKey": "scopeDecision",
+            "bindingIds": [],
+            "inputMappings": {
+              "artifact": "specDraft"
+            },
+            "config": {},
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "capacity",
+          "type": "plan_capacity",
+          "stage": "product",
+          "position": {
+            "x": 330,
+            "y": 310
+          },
+          "data": {
+            "label": "Ticket and capacity plan",
+            "outputKey": "capacityProposal",
+            "bindingIds": [],
+            "inputMappings": {
+              "spec": "specDraft",
+              "approval": "scopeDecision"
+            },
+            "config": {},
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "implementation",
+          "type": "implement_preview",
+          "stage": "code",
+          "position": {
+            "x": 660,
+            "y": 0
+          },
+          "data": {
+            "label": "Implementation fixture",
+            "outputKey": "fakeDiff",
+            "bindingIds": [],
+            "inputMappings": {
+              "spec": "specDraft",
+              "approval": "scopeDecision",
+              "plan": "capacityProposal"
+            },
+            "config": {},
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "review",
+          "type": "review_preview",
+          "stage": "review",
+          "position": {
+            "x": 990,
+            "y": 0
+          },
+          "data": {
+            "label": "Independent review",
+            "outputKey": "reviewFindings",
+            "bindingIds": [],
+            "inputMappings": {
+              "diff": "fakeDiff"
+            },
+            "config": {},
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "review-gate",
+          "type": "approval",
+          "stage": "review",
+          "position": {
+            "x": 990,
+            "y": 155
+          },
+          "data": {
+            "label": "Review current diff",
+            "outputKey": "reviewDecision",
+            "bindingIds": [],
+            "inputMappings": {
+              "artifact": "fakeDiff",
+              "findings": "reviewFindings"
+            },
+            "config": {},
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "ci",
+          "type": "ci_preview",
+          "stage": "ci",
+          "position": {
+            "x": 1320,
+            "y": 0
+          },
+          "data": {
+            "label": "CI fixture",
+            "outputKey": "ciReport",
+            "bindingIds": [],
+            "inputMappings": {
+              "diff": "fakeDiff",
+              "review": "reviewDecision"
+            },
+            "config": {},
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "release-gate",
+          "type": "approval",
+          "stage": "deploy",
+          "position": {
+            "x": 1650,
+            "y": 0
+          },
+          "data": {
+            "label": "Approve production preview",
+            "outputKey": "releaseDecision",
+            "bindingIds": [],
+            "inputMappings": {
+              "artifact": "fakeDiff",
+              "ci": "ciReport"
+            },
+            "config": {},
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        },
+        {
+          "id": "rollout",
+          "type": "deploy_preview",
+          "stage": "deploy",
+          "position": {
+            "x": 1650,
+            "y": 155
+          },
+          "data": {
+            "label": "Simulated rollout",
+            "outputKey": "releasePreview",
+            "bindingIds": [],
+            "inputMappings": {
+              "ci": "ciReport",
+              "approval": "releaseDecision"
+            },
+            "config": {},
+            "timeoutSeconds": 60,
+            "maxRetries": 0
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "edge-trigger-tickets",
+          "source": "trigger",
+          "target": "tickets",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-tickets-docs",
+          "source": "tickets",
+          "target": "docs",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-docs-code-context",
+          "source": "docs",
+          "target": "code-context",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-code-context-clarify",
+          "source": "code-context",
+          "target": "clarify",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-clarify-spec",
+          "source": "clarify",
+          "target": "spec",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-spec-scope-gate",
+          "source": "spec",
+          "target": "scope-gate",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-scope-gate-capacity",
+          "source": "scope-gate",
+          "target": "capacity",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-capacity-implementation",
+          "source": "capacity",
+          "target": "implementation",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-implementation-review",
+          "source": "implementation",
+          "target": "review",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-review-review-gate",
+          "source": "review",
+          "target": "review-gate",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-review-gate-ci",
+          "source": "review-gate",
+          "target": "ci",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-ci-release-gate",
+          "source": "ci",
+          "target": "release-gate",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        },
+        {
+          "id": "edge-release-gate-rollout",
+          "source": "release-gate",
+          "target": "rollout",
+          "sourceHandle": "output",
+          "targetHandle": "context"
+        }
+      ]
+    }
+  ],
+  "templateCatalog": [
+    {
+      "id": "template-evidence",
+      "name": "Evidence-first delivery"
+    },
+    {
+      "id": "template-bug",
+      "name": "Bug investigation"
+    },
+    {
+      "id": "template-hotfix",
+      "name": "Security hotfix"
+    }
+  ]
+}

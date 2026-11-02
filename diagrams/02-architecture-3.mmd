@@ -1,0 +1,16 @@
+sequenceDiagram
+  actor B as Business
+  participant C as Coordinator
+  participant R as Retrieval
+  participant A as Artifact store
+  actor P as Product lead
+  participant E as Isolated executor
+  B->>C: Outcome and constraints
+  C->>R: Scoped context request
+  R-->>C: Evidence, conflicts, gaps
+  C->>A: Spec v1 and evidence manifest
+  C-->>P: Request scope approval for v1 hash
+  P->>C: Approve v1
+  C->>E: Approved plan and scoped capability
+  E-->>A: Implementation artifact v1
+  C-->>P: New review gate for new artifact

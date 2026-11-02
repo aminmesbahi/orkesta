@@ -1,0 +1,17 @@
+stateDiagram-v2
+  [*] --> idle
+  idle --> running: start fixture
+  running --> waiting_input: clarification
+  waiting_input --> running: answer
+  running --> waiting_approval: gate
+  waiting_approval --> running: valid approval
+  waiting_approval --> needs_changes: request changes
+  running --> failed: scripted failure
+  failed --> running: retry allowed
+  running --> cancelled: cancel
+  waiting_input --> cancelled: cancel
+  waiting_approval --> cancelled: cancel
+  running --> completed: final preview
+  needs_changes --> [*]
+  completed --> [*]
+  cancelled --> [*]

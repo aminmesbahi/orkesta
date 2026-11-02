@@ -1,0 +1,485 @@
+{
+  "schemaVersion": "demo.events.v1",
+  "wireProtocol": "internal; AG-UI-inspired, not protocol-conformant",
+  "offsetPolicy": "Offsets apply to active playback time; gate waits suspend scheduling of later events.",
+  "events": [
+    {
+      "id": "evt-001",
+      "seq": 1,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "trigger",
+      "attempt": 1,
+      "offsetMs": 500,
+      "type": "run_started",
+      "summary": "Start synthetic partial-refund scenario",
+      "payload": {}
+    },
+    {
+      "id": "evt-002",
+      "seq": 2,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "trigger",
+      "attempt": 1,
+      "offsetMs": 1000,
+      "type": "node_started",
+      "summary": "Business request (simulation)",
+      "payload": {}
+    },
+    {
+      "id": "evt-003",
+      "seq": 3,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "trigger",
+      "attempt": 1,
+      "offsetMs": 1500,
+      "type": "node_succeeded",
+      "summary": "Business request fixture complete",
+      "payload": {}
+    },
+    {
+      "id": "evt-004",
+      "seq": 4,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "tickets",
+      "attempt": 1,
+      "offsetMs": 2000,
+      "type": "node_started",
+      "summary": "Find similar Jira tickets (simulation)",
+      "payload": {}
+    },
+    {
+      "id": "evt-005",
+      "seq": 5,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "tickets",
+      "attempt": 1,
+      "offsetMs": 2500,
+      "type": "node_succeeded",
+      "summary": "Find similar Jira tickets fixture complete",
+      "payload": {}
+    },
+    {
+      "id": "evt-006",
+      "seq": 6,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "docs",
+      "attempt": 1,
+      "offsetMs": 3000,
+      "type": "node_started",
+      "summary": "Read Confluence decisions (simulation)",
+      "payload": {}
+    },
+    {
+      "id": "evt-007",
+      "seq": 7,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "docs",
+      "attempt": 1,
+      "offsetMs": 3500,
+      "type": "node_succeeded",
+      "summary": "Read Confluence decisions fixture complete",
+      "payload": {}
+    },
+    {
+      "id": "evt-008",
+      "seq": 8,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "code-context",
+      "attempt": 1,
+      "offsetMs": 4000,
+      "type": "node_started",
+      "summary": "Inspect targeted code (simulation)",
+      "payload": {}
+    },
+    {
+      "id": "evt-009",
+      "seq": 9,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "code-context",
+      "attempt": 1,
+      "offsetMs": 4500,
+      "type": "node_succeeded",
+      "summary": "Inspect targeted code fixture complete",
+      "payload": {}
+    },
+    {
+      "id": "evt-010",
+      "seq": 10,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "clarify",
+      "attempt": 1,
+      "offsetMs": 5000,
+      "type": "node_started",
+      "summary": "Resolve scope conflict (simulation)",
+      "payload": {}
+    },
+    {
+      "id": "evt-011",
+      "seq": 11,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "clarify",
+      "attempt": 1,
+      "offsetMs": 5500,
+      "type": "clarification_required",
+      "summary": "Choose order-level or line-item scope",
+      "payload": {
+        "pause": true,
+        "choices": [
+          "order_amount",
+          "line_item"
+        ],
+        "resumeAction": "answer_clarification"
+      }
+    },
+    {
+      "id": "evt-012",
+      "seq": 12,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "clarify",
+      "attempt": 1,
+      "offsetMs": 6000,
+      "type": "node_succeeded",
+      "summary": "Resolve scope conflict fixture complete",
+      "payload": {}
+    },
+    {
+      "id": "evt-013",
+      "seq": 13,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "spec",
+      "attempt": 1,
+      "offsetMs": 6500,
+      "type": "node_started",
+      "summary": "Compose normalized spec (simulation)",
+      "payload": {}
+    },
+    {
+      "id": "evt-014",
+      "seq": 14,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "spec",
+      "attempt": 1,
+      "offsetMs": 7000,
+      "type": "node_succeeded",
+      "summary": "Compose normalized spec fixture complete",
+      "payload": {}
+    },
+    {
+      "id": "evt-015",
+      "seq": 15,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "scope-gate",
+      "attempt": 1,
+      "offsetMs": 7500,
+      "type": "node_started",
+      "summary": "Approve current spec (simulation)",
+      "payload": {}
+    },
+    {
+      "id": "evt-016",
+      "seq": 16,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "scope-gate",
+      "attempt": 1,
+      "offsetMs": 8000,
+      "type": "approval_required",
+      "summary": "Current-version approval required",
+      "payload": {
+        "pause": true,
+        "role": "product_lead",
+        "artifactKey": "specDraft",
+        "resumeAction": "approve_current_artifact"
+      }
+    },
+    {
+      "id": "evt-017",
+      "seq": 17,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "scope-gate",
+      "attempt": 1,
+      "offsetMs": 8500,
+      "type": "node_succeeded",
+      "summary": "Approve current spec fixture complete",
+      "payload": {}
+    },
+    {
+      "id": "evt-018",
+      "seq": 18,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "capacity",
+      "attempt": 1,
+      "offsetMs": 9000,
+      "type": "node_started",
+      "summary": "Ticket and capacity plan (simulation)",
+      "payload": {}
+    },
+    {
+      "id": "evt-019",
+      "seq": 19,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "capacity",
+      "attempt": 1,
+      "offsetMs": 9500,
+      "type": "node_succeeded",
+      "summary": "Ticket and capacity plan fixture complete",
+      "payload": {}
+    },
+    {
+      "id": "evt-020",
+      "seq": 20,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "implementation",
+      "attempt": 1,
+      "offsetMs": 10000,
+      "type": "node_started",
+      "summary": "Implementation fixture (simulation)",
+      "payload": {}
+    },
+    {
+      "id": "evt-021",
+      "seq": 21,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "implementation",
+      "attempt": 1,
+      "offsetMs": 10500,
+      "type": "node_succeeded",
+      "summary": "Implementation fixture fixture complete",
+      "payload": {}
+    },
+    {
+      "id": "evt-022",
+      "seq": 22,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "review",
+      "attempt": 1,
+      "offsetMs": 11000,
+      "type": "node_started",
+      "summary": "Independent review (simulation)",
+      "payload": {}
+    },
+    {
+      "id": "evt-023",
+      "seq": 23,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "review",
+      "attempt": 1,
+      "offsetMs": 11500,
+      "type": "artifact_available",
+      "summary": "Fixture review: concurrency guard missing",
+      "payload": {
+        "findingId": "finding-race",
+        "pause": true,
+        "resumeAction": "select_remediation_then_reverify",
+        "invalidates": [
+          "reviewDecision"
+        ]
+      }
+    },
+    {
+      "id": "evt-024",
+      "seq": 24,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "review",
+      "attempt": 1,
+      "offsetMs": 12000,
+      "type": "node_succeeded",
+      "summary": "Independent review fixture complete",
+      "payload": {}
+    },
+    {
+      "id": "evt-025",
+      "seq": 25,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "review-gate",
+      "attempt": 1,
+      "offsetMs": 12500,
+      "type": "node_started",
+      "summary": "Review current diff (simulation)",
+      "payload": {}
+    },
+    {
+      "id": "evt-026",
+      "seq": 26,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "review-gate",
+      "attempt": 1,
+      "offsetMs": 13000,
+      "type": "approval_required",
+      "summary": "Current-version approval required",
+      "payload": {
+        "pause": true,
+        "role": "reviewer",
+        "artifactKey": "fakeDiff",
+        "resumeAction": "approve_current_artifact"
+      }
+    },
+    {
+      "id": "evt-027",
+      "seq": 27,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "review-gate",
+      "attempt": 1,
+      "offsetMs": 13500,
+      "type": "node_succeeded",
+      "summary": "Review current diff fixture complete",
+      "payload": {}
+    },
+    {
+      "id": "evt-028",
+      "seq": 28,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "ci",
+      "attempt": 1,
+      "offsetMs": 14000,
+      "type": "node_started",
+      "summary": "CI fixture (simulation)",
+      "payload": {}
+    },
+    {
+      "id": "evt-029",
+      "seq": 29,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "ci",
+      "attempt": 1,
+      "offsetMs": 14500,
+      "type": "node_succeeded",
+      "summary": "CI fixture fixture complete",
+      "payload": {}
+    },
+    {
+      "id": "evt-030",
+      "seq": 30,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "release-gate",
+      "attempt": 1,
+      "offsetMs": 15000,
+      "type": "node_started",
+      "summary": "Approve production preview (simulation)",
+      "payload": {}
+    },
+    {
+      "id": "evt-031",
+      "seq": 31,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "release-gate",
+      "attempt": 1,
+      "offsetMs": 15500,
+      "type": "approval_required",
+      "summary": "Current-version approval required",
+      "payload": {
+        "pause": true,
+        "role": "release_approver",
+        "artifactKey": "fakeDiff",
+        "resumeAction": "approve_current_artifact"
+      }
+    },
+    {
+      "id": "evt-032",
+      "seq": 32,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "release-gate",
+      "attempt": 1,
+      "offsetMs": 16000,
+      "type": "node_succeeded",
+      "summary": "Approve production preview fixture complete",
+      "payload": {}
+    },
+    {
+      "id": "evt-033",
+      "seq": 33,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "rollout",
+      "attempt": 1,
+      "offsetMs": 16500,
+      "type": "node_started",
+      "summary": "Simulated rollout (simulation)",
+      "payload": {}
+    },
+    {
+      "id": "evt-034",
+      "seq": 34,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "rollout",
+      "attempt": 1,
+      "offsetMs": 17000,
+      "type": "node_succeeded",
+      "summary": "Simulated rollout fixture complete",
+      "payload": {}
+    },
+    {
+      "id": "evt-035",
+      "seq": 35,
+      "runId": "run-refund-001",
+      "runToken": "demo-main-1",
+      "nodeId": "rollout",
+      "attempt": 1,
+      "offsetMs": 17500,
+      "type": "run_completed",
+      "summary": "Simulation complete. No tickets, PRs or deployments were created.",
+      "payload": {}
+    }
+  ],
+  "variants": [
+    {
+      "id": "restricted-source",
+      "nodeId": "docs",
+      "type": "node_failed",
+      "retryable": true,
+      "code": "PERMISSION_DENIED",
+      "visibility": "no restricted content"
+    },
+    {
+      "id": "jira-rate-limit",
+      "nodeId": "tickets",
+      "type": "node_failed",
+      "retryable": true,
+      "retryAfterMs": 1000,
+      "maxAttempts": 3
+    },
+    {
+      "id": "failed-ci",
+      "nodeId": "ci",
+      "type": "node_failed",
+      "retryable": true,
+      "code": "CONTRACT_TEST_FAILED",
+      "blocks": [
+        "release-gate",
+        "rollout"
+      ]
+    }
+  ]
+}

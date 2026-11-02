@@ -1,0 +1,26 @@
+flowchart LR
+  subgraph Business
+    A[Business request] --> B[Find similar Jira tickets]
+    B --> C[Read Confluence decisions]
+    C --> D[Inspect targeted code]
+    D --> E[Clarify conflict with business]
+  end
+  subgraph Product
+    E --> F[Generate normalized spec]
+    F --> G{Scope approval}
+    G -->|approved| H[Ticket and capacity plan]
+  end
+  subgraph Code
+    H --> I[Implementation preview]
+  end
+  subgraph Review
+    I --> J[Independent review]
+    J --> K{Review gate}
+  end
+  subgraph CI
+    K -->|approved| L[CI simulation]
+  end
+  subgraph Deploy
+    L --> M{Release approval}
+    M -->|approved| N[Rollout preview]
+  end

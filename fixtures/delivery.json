@@ -1,0 +1,291 @@
+{
+  "synthetic": true,
+  "diffs": [
+    {
+      "id": "diff-refund",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "version": 1,
+      "authorId": "nima",
+      "revision": "demo-diff-v1",
+      "files": [
+        {
+          "path": "order-service/src/orders/refund-policy.ts",
+          "lines": [
+            {
+              "number": 71,
+              "kind": "add",
+              "text": "if (requestedMinor <= capturedMinor) return allowRefund();"
+            }
+          ],
+          "note": "Deliberately missing atomic cumulative refund reservation."
+        },
+        {
+          "path": "payment-api/src/refunds/handler.ts",
+          "lines": [
+            {
+              "number": 42,
+              "kind": "add",
+              "text": "validatePositiveMinorUnits(request.amountMinor);"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "diff-refund",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "version": 2,
+      "authorId": "nima",
+      "revision": "demo-diff-v2",
+      "files": [
+        {
+          "path": "order-service/src/orders/refund-policy.ts",
+          "lines": [
+            {
+              "number": 71,
+              "kind": "add",
+              "text": "return reserveRemainingBalanceAtomically(orderId, requestedMinor, idempotencyKey);"
+            }
+          ],
+          "note": "Illustrative pseudocode, not executable implementation."
+        }
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "finding-race",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "artifactId": "diff-refund",
+      "artifactVersion": 1,
+      "path": "order-service/src/orders/refund-policy.ts",
+      "line": 71,
+      "severity": "high",
+      "description": "Concurrent partial refunds may exceed the captured total without atomic reservation.",
+      "disposition": "open",
+      "reviewerId": "omar"
+    },
+    {
+      "id": "finding-verified",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "artifactId": "diff-refund",
+      "artifactVersion": 2,
+      "path": "order-service/src/orders/refund-policy.ts",
+      "line": 71,
+      "severity": "high",
+      "description": "Scripted remediation reviewed against fixture checklist.",
+      "disposition": "verified_fixed",
+      "reviewerId": "omar"
+    }
+  ],
+  "ciRuns": [
+    {
+      "id": "ci-fail",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "artifactId": "diff-refund",
+      "artifactVersion": 1,
+      "status": "failed",
+      "suites": [
+        {
+          "name": "amount validation",
+          "status": "passed"
+        },
+        {
+          "name": "cumulative cap",
+          "status": "passed"
+        },
+        {
+          "name": "duplicate/concurrent refund contract",
+          "status": "failed",
+          "log": "Fixture output: expected reserved balance <= captured total."
+        },
+        {
+          "name": "ledger reconciliation",
+          "status": "passed"
+        },
+        {
+          "name": "UI permissions",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "id": "ci-pass",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "artifactId": "diff-refund",
+      "artifactVersion": 2,
+      "status": "passed",
+      "suites": [
+        {
+          "name": "amount validation",
+          "status": "passed",
+          "log": "Fixture output only; no tests were executed."
+        },
+        {
+          "name": "cumulative cap",
+          "status": "passed",
+          "log": "Fixture output only; no tests were executed."
+        },
+        {
+          "name": "duplicate/concurrent refund contract",
+          "status": "passed",
+          "log": "Fixture output only; no tests were executed."
+        },
+        {
+          "name": "ledger reconciliation",
+          "status": "passed",
+          "log": "Fixture output only; no tests were executed."
+        },
+        {
+          "name": "UI permissions",
+          "status": "passed",
+          "log": "Fixture output only; no tests were executed."
+        }
+      ]
+    }
+  ],
+  "releases": [
+    {
+      "id": "release-blocked",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "artifactId": "diff-refund",
+      "artifactVersion": 1,
+      "environment": "production",
+      "status": "blocked",
+      "ciRunId": "ci-fail",
+      "blockers": [
+        "Failed contract test",
+        "Independent current-version release approval missing"
+      ]
+    },
+    {
+      "id": "release-ready",
+      "tenantId": "atlas",
+      "projectId": "refunds",
+      "artifactId": "diff-refund",
+      "artifactVersion": 2,
+      "environment": "production",
+      "status": "waiting_approval",
+      "ciRunId": "ci-pass",
+      "rolloutSteps": [
+        "Preflight fixture",
+        "Staging preview",
+        "Production approval",
+        "10% preview",
+        "100% preview"
+      ],
+      "rollbackPlan": [
+        "Pause simulated rollout",
+        "Restore previous fixture version",
+        "Inspect reconciliation fixture"
+      ]
+    }
+  ],
+  "surface": {
+    "schemaVersion": "demo.surface.v1",
+    "surfaceId": "surface-refund",
+    "catalogVersion": "demo-catalog-v1",
+    "components": [
+      {
+        "id": "surface-evidence",
+        "type": "evidence-card",
+        "props": {
+          "evidenceId": "ev-code-payment"
+        }
+      },
+      {
+        "id": "surface-question",
+        "type": "clarification-form",
+        "props": {
+          "question": "Order amount or line items?",
+          "choices": [
+            "Order amount",
+            "Line items"
+          ]
+        }
+      },
+      {
+        "id": "surface-approval",
+        "type": "approval-card",
+        "props": {
+          "artifactId": "spec-refund",
+          "version": 2
+        }
+      },
+      {
+        "id": "surface-capacity",
+        "type": "capacity-table",
+        "props": {
+          "memberIds": [
+            "sara",
+            "nima",
+            "elena"
+          ]
+        }
+      }
+    ],
+    "allowedActions": [
+      "open_evidence",
+      "answer_clarification",
+      "preview_approval",
+      "compare_capacity"
+    ]
+  },
+  "scenarios": [
+    {
+      "id": "main-refund",
+      "name": "S1 main-refund",
+      "seed": "orkesta-fixed-1",
+      "fixtureRevision": "2026-11-02.1"
+    },
+    {
+      "id": "restricted-source",
+      "name": "S2 restricted-source",
+      "seed": "orkesta-fixed-1",
+      "fixtureRevision": "2026-11-02.1"
+    },
+    {
+      "id": "tenant-isolation",
+      "name": "S3 tenant-isolation",
+      "seed": "orkesta-fixed-1",
+      "fixtureRevision": "2026-11-02.1"
+    },
+    {
+      "id": "broken-workflow",
+      "name": "S4 broken-workflow",
+      "seed": "orkesta-fixed-1",
+      "fixtureRevision": "2026-11-02.1"
+    },
+    {
+      "id": "failed-ci",
+      "name": "S5 failed-ci",
+      "seed": "orkesta-fixed-1",
+      "fixtureRevision": "2026-11-02.1"
+    },
+    {
+      "id": "capacity-what-if",
+      "name": "S6 capacity-what-if",
+      "seed": "orkesta-fixed-1",
+      "fixtureRevision": "2026-11-02.1"
+    },
+    {
+      "id": "empty-onboarding",
+      "name": "S7 empty-onboarding",
+      "seed": "orkesta-fixed-1",
+      "fixtureRevision": "2026-11-02.1"
+    },
+    {
+      "id": "catalog-rejection",
+      "name": "S8 catalog-rejection",
+      "seed": "orkesta-fixed-1",
+      "fixtureRevision": "2026-11-02.1"
+    }
+  ]
+}

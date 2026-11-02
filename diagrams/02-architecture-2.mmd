@@ -1,0 +1,19 @@
+flowchart TB
+  UI[React UI] --> BFF[Authenticated API and event gateway]
+  BFF --> POL[Policy and tenant context]
+  BFF --> CP[Control plane: teams projects workflows skills]
+  BFF --> ORCH[Durable run coordinator]
+  ORCH --> CTX[Context planner and retrieval]
+  CTX --> IDX[Tenant and ACL partitioned search indexes]
+  CTX --> CG[Connector gateway: MCP or native adapters]
+  CG --> SRC[Jira Confluence GitHub Nova calendars files]
+  ORCH --> H[Harness adapter and policy hooks]
+  H --> EX[Isolated coding and review workers]
+  ORCH --> AP[Version-bound approval service]
+  ORCH --> ART[Versioned artifacts and evidence]
+  CP --> DB[Relational tenant metadata]
+  ART --> OBJ[Encrypted object storage]
+  ORCH --> LOG[Audit and operational telemetry]
+  POL --> CG
+  POL --> CTX
+  POL --> EX

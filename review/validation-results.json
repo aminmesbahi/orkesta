@@ -1,0 +1,14 @@
+{
+  "checkedAt": "2026-11-02",
+  "files": 40,
+  "markdownFiles": 28,
+  "jsonFiles": 5,
+  "mermaidFiles": 6,
+  "checks": [
+    "All JSON files parse.",
+    "Markdown relative links resolve and code fences balance.",
+    "Tenant/project/connector/resource/binding/evidence references and capability grants are coherent; 133 Atlas catalog repositories, four detailed.",
+    "Main graph has 14 reachable acyclic nodes, six stages, valid binding stages/output mappings; 35 ordered unique fixture events."
+  ],
+  "failures": []
+}
